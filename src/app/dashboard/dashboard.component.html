@@ -1,0 +1,144 @@
+<div class="page-background">
+  <app-navigate-home-button></app-navigate-home-button>
+  <div class="dashboard-container">
+    <div class="header">
+      <h2>Bilgi Paneli</h2>
+    </div>
+    <div class="stats-row">
+      <div class="stat-card total-patients">
+        <img
+          src="assets/total-patients.png"
+          alt="Total Patients Icon"
+          class="stat-icon"
+        />
+        <div class="stat-info">
+          <h3>{{ totalPatients }}</h3>
+          <p>Toplam Hasta</p>
+        </div>
+      </div>
+
+      <div class="stat-card active-patients">
+        <img
+          src="assets/active-patients.png"
+          alt="Active Patients Icon"
+          class="stat-icon"
+        />
+        <div class="stat-info">
+          <h3>{{ activePatients }}</h3>
+          <p>Aktif Hasta</p>
+        </div>
+      </div>
+
+      <div class="stat-card deleted-patients">
+        <img
+          src="assets/deleted-patients.png"
+          alt="Deleted Patients Icon"
+          class="stat-icon"
+        />
+        <div class="stat-info">
+          <h3>{{ deletedPatients }}</h3>
+          <p>Silinen Hasta</p>
+        </div>
+      </div>
+
+      <div class="stat-card female-patients">
+        <img
+          src="assets/female-patients.png"
+          alt="Female Patients Icon"
+          class="stat-icon"
+        />
+        <div class="stat-info">
+          <h3>{{ femalePatients }}</h3>
+          <p>Kadın Hasta</p>
+        </div>
+      </div>
+
+      <div class="stat-card male-patients">
+        <img
+          src="assets/male-patients.png"
+          alt="Male Patients Icon"
+          class="stat-icon"
+        />
+        <div class="stat-info">
+          <h3>{{ malePatients }}</h3>
+          <p>Erkek Hasta</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="row-divider"></div>
+
+    <div class="content">
+      <div class="card">
+        <h3>Toplam Hasta</h3>
+        <p-chart
+          type="pie"
+          [data]="totalPatientsData"
+          [options]="pieChartOptions"
+        ></p-chart>
+      </div>
+
+      <div class="card">
+        <h3>Ortalama Yaş</h3>
+        <p-chart
+          type="bar"
+          [data]="averageAgeData"
+          [options]="barChartOptions"
+        ></p-chart>
+      </div>
+
+      <div class="card">
+        <h3>Cinsiyet Dağılımı</h3>
+        <p-chart
+          type="pie"
+          [data]="genderData"
+          [options]="pieChartOptions"
+        ></p-chart>
+      </div>
+    </div>
+
+    <div class="row-divider"></div>
+
+    <div class="header">
+      <h3>Şehirlere Göre Hasta Dağılımı</h3>
+    </div>
+    <div class="patients-by-city">
+      <div class="city-card">
+        <p-chart
+          type="bar"
+          [data]="patientsByCityDataPart1"
+          [options]="patientsByCityChartOptions"
+        ></p-chart>
+      </div>
+    </div>
+
+    <div class="patients-by-city">
+      <div class="city-card">
+        <p-chart
+          type="bar"
+          [data]="patientsByCityDataPart2"
+          [options]="patientsByCityChartOptions"
+        ></p-chart>
+      </div>
+    </div>
+    <div class="content" style="display: flex; justify-content: space-evenly;">
+      <div class="card">
+        <h3>3 Büyük Şehir Hasta Dağılımı</h3>
+        <p-chart
+          type="pie"
+          [data]="biggestCitiesData"
+          [options]="pieChartOptions"
+        ></p-chart>
+      </div>
+
+      <div class="card">
+        <h3>En Çok Hasta Bulunan 3 Şehir</h3>
+        <p-chart
+          type="pie"
+          [data]="topThreeCitiesData"
+          [options]="pieChartOptions"
+        ></p-chart>
+      </div>
+    </div>
+  </div>
+</div>

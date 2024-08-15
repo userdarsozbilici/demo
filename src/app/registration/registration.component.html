@@ -1,0 +1,116 @@
+<div class="page-background">
+  <app-navigate-home-button></app-navigate-home-button>
+  <div class="registration-container">
+    <div class="logo-container">
+      <img src="assets/erc-logo.jpg" alt="ERC Logo" class="logo" />
+    </div>
+    <h2>Kayıt Formu</h2>
+    <p>Kayıt için formu dikkatlice doldurun</p>
+    <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+      <div class="form-grid-4-col">
+        <!-- TC Kimlik -->
+        <div class="p-field">
+          <label for="identityNumber">TC Kimlik <span class="required-asterisk">*</span></label>
+          <input id="identityNumber" type="text" pInputText formControlName="identityNumber" maxlength="11" minlength="11"/>
+          <div *ngIf="submitted && registrationForm.get('identityNumber')?.invalid">
+            <small class="p-error">TC Kimlik zorunludur</small>
+          </div>
+        </div>
+        <!-- İsim -->
+        <div class="p-field">
+          <label for="firstName">İsim <span class="required-asterisk">*</span></label>
+          <input id="firstName" type="text" pInputText formControlName="firstName" />
+          <div *ngIf="submitted && registrationForm.get('firstName')?.invalid">
+            <small class="p-error">İsim zorunludur</small>
+          </div>
+        </div>
+        <!-- Soyisim -->
+        <div class="p-field">
+          <label for="lastName">Soyisim <span class="required-asterisk">*</span></label>
+          <input id="lastName" type="text" pInputText formControlName="lastName" />
+          <div *ngIf="submitted && registrationForm.get('lastName')?.invalid">
+            <small class="p-error">Soyisim zorunludur</small>
+          </div>
+        </div>
+        <!-- Doğum Tarihi -->
+        <div class="p-field">
+          <label for="birthDate">Doğum Tarihi <span class="required-asterisk">*</span></label>
+          <input id="birthDate" type="date" pInputText formControlName="birthDate" placeholder="dd.mm.yyyy" />
+          <div *ngIf="submitted && registrationForm.get('birthDate')?.invalid">
+            <small class="p-error">Doğum Tarihi zorunludur ve dd.mm.yyyy formatında olmalıdır</small>
+          </div>
+        </div>
+        <!-- Doğum Yeri -->
+        <div class="p-field">
+          <label for="birthLocation">Doğum Yeri <span class="required-asterisk">*</span></label>
+          <app-combo-box
+            [formGroup]="registrationForm"
+            cityControlName="birthCity"
+            countyControlName="birthCounty">
+          </app-combo-box>
+          <div *ngIf="submitted && registrationForm.get('birthCity')?.invalid">
+            <small class="p-error">Doğum Yeri Şehir zorunludur</small>
+          </div>
+          <div *ngIf="submitted && registrationForm.get('birthCounty')?.invalid">
+            <small class="p-error">Doğum Yeri İlçe zorunludur</small>
+          </div>
+        </div>
+        <!-- Yaşadığı Yer -->
+        <div class="p-field">
+          <label for="residenceLocation">Yaşadığı Yer <span class="required-asterisk">*</span></label>
+          <app-combo-box
+            [formGroup]="registrationForm"
+            cityControlName="residenceCity"
+            countyControlName="residenceCounty">
+          </app-combo-box>
+          <div *ngIf="submitted && registrationForm.get('residenceCity')?.invalid">
+            <small class="p-error">Yaşadığı Yer Şehir zorunludur</small>
+          </div>
+          <div *ngIf="submitted && registrationForm.get('residenceCounty')?.invalid">
+            <small class="p-error">Yaşadığı Yer İlçe zorunludur</small>
+          </div>
+        </div>
+        <!-- Cinsiyet -->
+        <div class="p-field">
+          <label for="gender">Cinsiyet <span class="required-asterisk">*</span></label>
+          <p-dropdown
+            [options]="genders"
+            formControlName="gender"
+            placeholder="Cinsiyet Seçin">
+          </p-dropdown>
+          <div *ngIf="submitted && registrationForm.get('gender')?.invalid">
+            <small class="p-error">Cinsiyet zorunludur</small>
+          </div>
+        </div>
+        <!-- Telefon No -->
+        <div class="p-field">
+          <label for="phoneNumber">Telefon No <span class="required-asterisk">*</span></label>
+          <input id="phoneNumber" type="text" pInputText formControlName="mobilePhone" placeholder="(5xx) xxx-xxxx" appPhoneFormatter />
+          <div *ngIf="submitted && registrationForm.get('mobilePhone')?.invalid">
+            <small class="p-error">Telefon No zorunludur ve (5xx) xxx-xxxx formatına uygun olmalıdır</small>
+          </div>
+        </div>
+        <!-- Work Phone, Home Phone -->
+        <div class="p-field">
+          <label for="workPhone">İş Telefonu</label>
+          <input id="workPhone" type="text" pInputText formControlName="officePhone" placeholder="(xxx) xxx-xxxx" appPhoneFormatter/>
+        </div>
+        <div class="p-field">
+          <label for="homePhone">Ev Telefonu</label>
+          <input id="homePhone" type="text" pInputText formControlName="homePhone" placeholder="(xxx) xxx-xxxx" appPhoneFormatter />
+        </div>
+        <!-- Adres -->
+        <div class="p-field">
+          <label for="address">Adres <span class="required-asterisk">*</span></label>
+          <input id="address" type="text" pInputText formControlName="address" />
+          <div *ngIf="submitted && registrationForm.get('address')?.invalid">
+            <small class="p-error">Adres zorunludur</small>
+          </div>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button class="anim-bg-gradient" pButton type="submit" label="Gönder"></button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+.dropdown-container {
+    display: flex;
+    flex-direction: column; 
+    gap: 10px;
+  }
+  
+  .dropdown-city, .dropdown-county {
+    width: 100%; 
+    bottom: auto !important;
+  }
+  

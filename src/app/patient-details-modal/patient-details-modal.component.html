@@ -1,0 +1,181 @@
+<p-dialog
+  class="modal-container"
+  header="Hasta Detayları"
+  [(visible)]="displayModal"
+  [modal]="true"
+  [style]="{ width: '50vw' }"
+  [contentStyle]="{ padding: '1rem' }"
+  class="custom-modal"
+  (onHide)="close()"
+>
+  <div *ngIf="selectedPatient" class="modal-content">
+    <div class="modal-column">
+      <div class="modal-field">
+        <label for="identityNumber">TC Kimlik</label>
+        <input
+          id="identityNumber"
+          type="text"
+          pInputText
+          [(ngModel)]="selectedPatient.identityNumber"
+          [disabled]="true"
+        />
+      </div>
+      <div class="modal-field">
+        <label for="firstName">İsim</label>
+        <input
+          id="firstName"
+          type="text"
+          pInputText
+          [(ngModel)]="selectedPatient.firstName"
+          [disabled]="true"
+        />
+      </div>
+      <div class="modal-field">
+        <label for="lastName">Soyisim</label>
+        <input
+          id="lastName"
+          type="text"
+          pInputText
+          [(ngModel)]="selectedPatient.lastName"
+          [disabled]="true"
+        />
+      </div>
+      <div class="modal-field">
+        <label for="id">Hasta No</label>
+        <input
+          id="id"
+          type="text"
+          pInputText
+          [(ngModel)]="selectedPatient.id"
+          [disabled]="true"
+        />
+      </div>
+      <div class="modal-field">
+        <label for="gender">Cinsiyet</label>
+        <input
+          id="gender"
+          type="text"
+          pInputText
+          [value]="selectedPatient.gender === 'Male' ? 'Erkek' : 'Kadın'"
+          disabled
+        />
+      </div>
+      <div class="modal-field">
+        <label for="phoneNumber">Telefon No</label>
+        <input
+          id="phoneNumber"
+          type="text"
+          pInputText
+          [(ngModel)]="selectedPatient.phoneNumbers[0].mobilePhone"
+          [disabled]="!isEditMode"
+        />
+      </div>
+    </div>
+    <div class="modal-column">
+      <div class="modal-field">
+        <label for="birthDate">Doğum Tarihi</label>
+        <input
+          id="birthDate"
+          type="text"
+          pInputText
+          [(ngModel)]="selectedPatient.birthDate"
+          [disabled]="true"
+        />
+      </div>
+      <div class="modal-field">
+        <label for="birthPlace">Doğum Yeri</label>
+        <input
+          id="birthPlace"
+          type="text"
+          pInputText
+          [(ngModel)]="selectedPatient.birthPlaceName"
+          [disabled]="true"
+        />
+      </div>
+      <div class="modal-field">
+        <label for="residence">Yaşadığı Yer</label>
+        <!-- Render ComboBoxComponent when in edit mode, otherwise show the input -->
+        <ng-container *ngIf="isEditMode; else viewMode">
+          <app-combo-box 
+            [formGroup]="formGroup" 
+            cityControlName="residenceCity" 
+            countyControlName="residenceCounty">
+          </app-combo-box>
+        </ng-container>
+        <ng-template #viewMode>
+          <input
+            id="residence"
+            type="text"
+            pInputText
+            [(ngModel)]="selectedPatient.residenceName"
+            [disabled]="true"
+          />
+        </ng-template>
+      </div>
+      <div class="modal-field">
+        <label for="address">Adres</label>
+        <input
+          id="address"
+          type="text"
+          pInputText
+          [(ngModel)]="selectedPatient.address"
+          [disabled]="!isEditMode"
+        />
+      </div>
+      <div class="modal-field">
+        <label for="officePhone">İş Telefonu</label>
+        <input
+          id="officePhone"
+          type="text"
+          pInputText
+          [(ngModel)]="selectedPatient.phoneNumbers[0].officePhone"
+          [disabled]="!isEditMode"
+        />
+      </div>
+      <div class="modal-field">
+        <label for="homePhone">Ev Telefonu</label>
+        <input
+          id="homePhone"
+          type="text"
+          pInputText
+          [(ngModel)]="selectedPatient.phoneNumbers[0].homePhone"
+          [disabled]="!isEditMode"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="modal-actions">
+    <button
+      class="edit-button"
+      pButton
+      type="button"
+      label="Düzenle"
+      (click)="enableEdit()"
+      *ngIf="!isEditMode"
+    ></button>
+    <button
+      class="save-button"
+      pButton
+      type="button"
+      label="Değişiklikleri Kaydet"
+      (click)="save()"
+      *ngIf="isEditMode"
+    ></button>
+    <button
+      pButton
+      class="delete-button"
+      type="button"
+      label="İptal"
+      (click)="disableEdit()"
+      *ngIf="isEditMode"
+    ></button>
+    <button
+      pButton
+      class="delete-button"
+      type="button"
+      label="Hastayı Sil"
+      (click)="delete()"
+      *ngIf="!isEditMode"
+    ></button>
+  </div>
+</p-dialog>

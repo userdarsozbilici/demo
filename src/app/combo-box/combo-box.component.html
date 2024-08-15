@@ -1,0 +1,21 @@
+<div class="dropdown-container">
+    <p-dropdown 
+      class="dropdown-city"
+      [options]="cities" 
+      [formControl]="cityControl" 
+      optionLabel="name" 
+      optionValue="id" 
+      placeholder="Şehir Seçin" 
+      [filter]="true">
+    </p-dropdown>
+    <p-dropdown 
+      class="dropdown-county"
+      [options]="counties" 
+      [formControl]="countyControl" 
+      optionLabel="name" 
+      optionValue="id" 
+      placeholder="İlçe Seçin" 
+      [filter]="true">
+    </p-dropdown>
+  </div>
+  

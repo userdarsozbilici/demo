@@ -1,0 +1,107 @@
+
+.form-grid-4-col {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+.dropdown-container {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.dropdown-container p-dropdown {
+  flex: 1; 
+}
+
+.registration-container {
+  position: relative;
+  z-index: 1;
+  width: 60%;
+  margin: auto;
+  padding: 2rem;
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 20px 80px rgba(0, 0, 0, 0.4);
+}
+
+.logo-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.logo {
+  width: 100px;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+p {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #666;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.p-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.p-field label {
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.p-field input,
+.p-field p-dropdown {
+  width: 100%;
+}
+
+.form-actions {
+  margin-top: 1.5rem;
+  text-align: center;
+  grid-column: span 2;
+}
+
+.required-asterisk {
+  color: red;
+  margin-left: 2px;
+}
+
+button {
+  width: 50%;
+  border: none;
+  font-weight: 600;
+  padding: 1rem;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 8px;
+  box-shadow: 0 5px 50px rgba(25, 39, 49, 0.5);
+}
+
+.p-error {
+  color: #f44336;
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+.error-message {
+  color: #f44336;
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}

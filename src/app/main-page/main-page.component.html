@@ -1,0 +1,17 @@
+
+<div *ngIf="loading" class="page-background">
+  <app-loading-spinner></app-loading-spinner>
+</div>
+<div *ngIf="!loading && !searchPerformed">
+  <app-navigate-home-button></app-navigate-home-button>
+  <app-search
+    (search)="onSearch($event)"
+    (showAll)="showAllPatients()"
+  ></app-search>
+</div>
+<div *ngIf="!loading && searchPerformed">
+  <app-patients-table
+    [patients]="patients"
+    (resetSearch)="resetSearch()"
+  ></app-patients-table>
+</div>

@@ -1,1 +1,63 @@
-/* You can add global styles to this file, and also import other style files */
+.page-background {
+  background-image: linear-gradient(
+    325deg,
+    hsl(0deg 100% 41%) 0%,
+    hsl(238deg 100% 81%) 33%,
+    hsl(295deg 58% 60%) 67%,
+    hsl(0deg 100% 71%) 100%
+  );
+
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: max-content;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1vh;
+  padding-top:4vh;
+}
+
+.anim-bg-gradient {
+    padding: 0.6em 1.2em;
+    border-radius: 0.375em;
+    cursor: pointer;
+    color: black; /* Text color when the background is white */
+    background: white;
+    background-size: 200% 100%;
+    background-position: 100% 0;
+    border: 2px solid darkmagenta; /* Optional: border to match the text color */
+    transition: background 0.8s, color 0.1s;
+  }
+  
+  .anim-bg-gradient:hover {
+    color: white;
+    background: linear-gradient(120deg, darkmagenta, crimson, orange);
+    background-position: 0 0;
+  }
+
+  .blueish-anim-bg-gradient {
+    padding: 0.6em 1.2em;
+    border-radius: 0.375em;
+    cursor: pointer;
+    color: black; /* Text color when the background is white */
+    background: white;
+    background-size: 200% 100%;
+    background-position: 100% 0;
+    border: 2px solid #039CEA; /* Border to match the text color */
+    transition: background 0.8s, color 0.1s;
+}
+
+.blueish-anim-bg-gradient:hover {
+    color: black;
+    background: linear-gradient(120deg, #039CEA, #42A5F5, #81D4FA, #81D4FA, #039CEA);
+    background-position: 0 0;
+}
+
+
+html {
+  scroll-behavior: smooth;
+}
+
+  

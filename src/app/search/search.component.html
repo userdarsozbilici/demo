@@ -1,0 +1,32 @@
+<div class="page-background">
+  <app-navigate-home-button></app-navigate-home-button>
+  <div class="registration-container">
+    <div class="logo-container">
+      <img src="assets/erc-logo.jpg" alt="ERC Logo" class="logo">
+    </div>
+    <h2>Hasta Arama</h2>
+    <form [formGroup]="searchForm" (ngSubmit)="onSearch()">
+      <div class="form-grid">
+        <div class="p-field">
+          <label for="searchBy">Arama Kriteri</label>
+          <p-dropdown [options]="searchOptions" formControlName="searchBy" (onChange)="onSearchByChange($event)"></p-dropdown>
+        </div>
+        <div class="p-field">
+          <label for="searchTerm">{{ selectedPlaceholder }}</label>
+          <input id="searchTerm" 
+                 [type]="searchForm.get('searchBy')?.value === 'identityNumber' || searchForm.get('searchBy')?.value === 'id' ? 'number' : 'text'"
+                 pInputText 
+                 formControlName="searchTerm" 
+                 [placeholder]="selectedPlaceholder"/>
+          <div *ngIf="searchForm.get('searchTerm')?.invalid && (searchForm.get('searchTerm')?.dirty || searchForm.get('searchTerm')?.touched)">
+            <small class="p-error">{{ selectedPlaceholder }} zorunludur</small>
+          </div>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button class="anim-bg-gradient" pButton type="submit" label="Ara"></button>
+        <button  pButton type="button" label="Tümünü Göster" class="blueish-anim-bg-gradient show-all-button" (click)="showAllPatients()"></button>
+      </div>
+    </form>
+  </div>
+</div>

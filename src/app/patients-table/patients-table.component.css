@@ -1,0 +1,137 @@
+
+.registration-container {
+  width: 80%;
+  margin: auto;
+  padding: 1rem;
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 20px 80px rgba(0, 0, 0, 0.4);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  width: 100px;
+  height: auto;
+}
+
+.new-query-button {
+  background-color: #28a745;
+  border-color: #28a745;
+  box-shadow: 0 5px 20px rgba(25, 39, 49, 0.4);
+}
+
+.new-query-button:hover {
+  background-color: #01851f;
+  color: #fff;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.p-datatable-striped {
+  width: 100%;
+}
+
+.p-datatable-striped th,
+.p-datatable-striped td {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 150px; /* Adjust max-width as needed */
+}
+
+.modal-actions{
+  margin-top: 3%;
+}
+
+.modal-container {
+  width: 50vw !important;
+}
+
+.modal-content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal-column {
+  width: 48%;
+}
+
+.modal-field {
+  margin-bottom: 1rem;
+}
+
+.modal-field label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.modal-field input,
+.modal-field p-dropdown {
+  width: 100%;
+}
+
+.edit-button{
+  font-weight: 600;
+  background-color: white;
+  color: #0D89EC;
+  border: solid 0.15rem;
+  border-color: #0D89EC;
+  margin-right: 1rem;
+}
+
+.edit-button:hover{
+  font-weight: 600;
+  background-color: #0D89EC;
+  color: white;
+}
+
+.save-button {
+  font-weight: 600;
+  background-color: white;
+  color: #28a745;
+  border: solid 0.15rem;
+  border-color: #28a745;
+  margin-right: 1rem;
+}
+
+.save-button:hover {
+  font-weight: 600;
+  background-color: #28a745;
+  color: white;
+}
+
+.delete-button {
+  font-weight: 600;
+  border: solid 0.15rem;
+  background-color: white;
+  color: #dc3545;
+  border-color: #dc3545;
+}
+
+.delete-button:hover {
+  font-weight: 600;
+  background-color: #dc3545;
+  color: white;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+}
+

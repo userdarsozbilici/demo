@@ -1,0 +1,81 @@
+<div class="page-background">
+  <app-navigate-home-button></app-navigate-home-button>
+  <div class="registration-container">
+    <div class="header">
+      <div class="logo-container">
+        <img src="assets/erc-logo.jpg" alt="ERC Logo" class="logo" />
+      </div>
+      <button
+        pButton
+        type="button"
+        label="Yeni Sorgu"
+        class="new-query-button"
+        (click)="newQuery()"
+      ></button>
+    </div>
+    <h2>Hasta Tablosu</h2>
+    <p-table
+      [value]="patients"
+      [paginator]="true"
+      [rows]="rows"
+      [totalRecords]="totalRecords"
+      [(first)]="first"
+      (onPage)="onPage($event)"
+      class="p-datatable-striped"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th (click)="sortPatientsById()" style="cursor: pointer">
+            Hasta No 
+            <i [ngClass]="getSortIcon()" style="margin-left: 5px"></i>
+          </th>
+          <th>TC Kimlik</th>
+          <th>İsim</th>
+          <th>Soyisim</th>
+          <th>Doğum Tarihi</th>
+          <th>Doğum Yeri</th>
+          <th>Yaşadığı Yer</th>
+          <th (click)="togglePhoneType()" style="cursor: pointer">
+            Telefon <i [ngClass]="getPhoneIcon()" style="margin-left: 5px"></i>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-patient let-i="rowIndex">
+        <tr>
+          <td>{{patient.id}}</td>
+          <td>{{ patient.identityNumber }}</td>
+          <td>{{ patient.firstName }}</td>
+          <td>{{ patient.lastName }}</td>
+          <td>{{ patient.birthDate }}</td>
+          <td>{{ patient.birthPlaceName }}</td>
+          <td>{{ patient.residenceName }}</td>
+          <td>{{ getPhoneNumber(patient) }}</td>
+          <td>
+            <button
+              pButton
+              type="button"
+              icon="pi pi-eye"
+              (click)="openModal(patient)"
+              pTooltip="Hasta Detayları"
+            ></button>
+          </td>
+        </tr>
+      </ng-template>
+      
+      <ng-template pTemplate="paginator">
+        <span>{{ currentPage }} / {{ totalPages }}</span>
+      </ng-template>
+    </p-table>
+  </div>
+
+  <app-patient-details-modal
+    [displayModal]="displayModal"
+    [selectedPatient]="selectedPatient"
+    [isEditMode]="isEditMode"
+    (closeModal)="closeModal()"
+    (savePatient)="savePatient()"
+    (enableEditMode)="enableEditMode()"
+    (deletePatient)="deletePatient()"
+    (disableEditMode)="disableEditMode()"
+  ></app-patient-details-modal>
+</div>
