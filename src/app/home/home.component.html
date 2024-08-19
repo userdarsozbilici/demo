@@ -14,6 +14,7 @@
       <ng-container *ngIf="!showHastaIslemleri; else subActions">
         <button pButton type="button" label="Hasta İşlemleri" class="anim-bg-gradient home-action-button" (click)="toggleSection('hastaIslemleri')">Hasta İşlemleri</button>
         <button pButton type="button" label="Yönetim Paneli" class="anim-bg-gradient home-action-button" (click)="navigateTo('dashboard')">Bilgi Paneli</button>
+        <button pButton type="button" icon="pi pi-arrow-left" class="reddish-anim-bg-gradient back-button" (click)="logout()">Çıkış Yap</button>
       </ng-container>
 
       <!-- Sub Action Buttons for Hasta İşlemleri -->

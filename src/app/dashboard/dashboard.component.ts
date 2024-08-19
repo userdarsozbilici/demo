@@ -227,7 +227,7 @@ export class DashboardComponent implements OnInit {
         labels: labelsPart1,
         datasets: [
           {
-            label: 'Hasta Sayısı - 1',
+            label: 'Hasta Sayısı',
             data: dataPart1,
             backgroundColor: gradient,
             hoverBackgroundColor: gradient
@@ -239,7 +239,7 @@ export class DashboardComponent implements OnInit {
         labels: labelsPart2,
         datasets: [
           {
-            label: 'Hasta Sayısı - 2',
+            label: 'Hasta Sayısı',
             data: dataPart2,
             backgroundColor: gradient,
             hoverBackgroundColor: gradient

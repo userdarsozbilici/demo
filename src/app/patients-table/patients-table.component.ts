@@ -20,7 +20,7 @@ import { PatientDetailsModalComponent } from '../patient-details-modal/patient-d
     TooltipModule,
     NavigateHomeButtonComponent,
     ComboBoxComponent,
-    PatientDetailsModalComponent
+    PatientDetailsModalComponent,
   ],
   selector: 'app-patients-table',
   templateUrl: './patients-table.component.html',
@@ -28,7 +28,7 @@ import { PatientDetailsModalComponent } from '../patient-details-modal/patient-d
 })
 export class PatientsTableComponent implements OnInit {
   @Input() patients: Patient[] = [];
-  @Output() resetSearch = new EventEmitter<void>(); 
+  @Output() resetSearch = new EventEmitter<void>();
   first = 0;
   totalRecords = 0;
   rows = 5;
@@ -36,20 +36,51 @@ export class PatientsTableComponent implements OnInit {
   totalPages = 1;
   displayModal = false;
   selectedPatient: Patient | null = null;
-  phoneType: 'mobile' | 'home' | 'office' = 'mobile'; 
+  phoneType: 'mobile' | 'home' | 'office' = 'mobile';
   isEditMode = false;
   sortOrder: 'asc' | 'desc' | null = 'asc'; // Track sort order, initialized to null
+
+  loadingBirthPlace = true;
+  loadingResidence = true;
 
   constructor(
     private patientService: PatientService,
     private comboBoxService: ComboBoxService,
-    private toastr : ToastrService
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
     this.totalRecords = this.patients.length;
     this.totalPages = Math.ceil(this.totalRecords / this.rows);
-    this.sortPatientsById()
+    this.sortPatientsById();
+
+    this.loadCityNames();
+  }
+
+  loadCityNames() {
+    this.patients.forEach((patient) => {
+      this.comboBoxService.getCityNameByCountyId(patient.birthPlace).subscribe({
+        next: (cityName) => {
+          patient.birthPlaceName = cityName;
+          this.loadingBirthPlace = false;
+        },
+        error: () => {
+          this.loadingBirthPlace = false;
+          this.toastr.error('Doğum yeri yüklenirken bir hata oluştu.');
+        },
+      });
+
+      this.comboBoxService.getCityNameByCountyId(patient.residence).subscribe({
+        next: (cityName) => {
+          patient.residenceName = cityName;
+          this.loadingResidence = false;
+        },
+        error: () => {
+          this.loadingResidence = false;
+          this.toastr.error('Yaşadığı yer yüklenirken bir hata oluştu.');
+        },
+      });
+    });
   }
 
   onPage(event: any) {
@@ -72,9 +103,12 @@ export class PatientsTableComponent implements OnInit {
   }
 
   openModal(patient: Patient) {
-    this.selectedPatient = { 
-        ...patient, 
-        phoneNumbers: patient.phoneNumbers.length > 0 ? patient.phoneNumbers : [{ mobilePhone: '', officePhone: '', homePhone: '' }]
+    this.selectedPatient = {
+      ...patient,
+      phoneNumbers:
+        patient.phoneNumbers.length > 0
+          ? patient.phoneNumbers
+          : [{ mobilePhone: '', officePhone: '', homePhone: '' }],
     };
     this.displayModal = true;
     this.isEditMode = false;
@@ -88,7 +122,7 @@ export class PatientsTableComponent implements OnInit {
     this.isEditMode = true;
   }
 
-  disableEditMode(){
+  disableEditMode() {
     this.isEditMode = false;
   }
 
@@ -102,10 +136,15 @@ export class PatientsTableComponent implements OnInit {
           if (index !== -1) {
             this.patients[index] = this.selectedPatient!;
           }
-          this.toastr.success(`${this.selectedPatient?.firstName} ${this.selectedPatient?.lastName} hasta bilgileri başarıyla güncellendi!`)
+          this.toastr.success(
+            `${this.selectedPatient?.firstName} ${this.selectedPatient?.lastName} hasta bilgileri başarıyla güncellendi!`
+          );
           this.displayModal = false;
         },
-        error: (err) => this.toastr.error(`${this.selectedPatient?.firstName} ${this.selectedPatient?.lastName} hasta bilgileri güncellenemedi!`),
+        error: (err) =>
+          this.toastr.error(
+            `${this.selectedPatient?.firstName} ${this.selectedPatient?.lastName} hasta bilgileri güncellenemedi!`
+          ),
       });
     }
   }
@@ -117,10 +156,15 @@ export class PatientsTableComponent implements OnInit {
           this.patients = this.patients.filter(
             (p) => p.id !== this.selectedPatient!.id
           );
-          this.toastr.success(`${this.selectedPatient?.firstName} ${this.selectedPatient?.lastName} hasta başarıyla silindi!`)
+          this.toastr.success(
+            `${this.selectedPatient?.firstName} ${this.selectedPatient?.lastName} hasta başarıyla silindi!`
+          );
           this.displayModal = false;
         },
-        error: (err) => this.toastr.error(`${this.selectedPatient?.firstName} ${this.selectedPatient?.lastName} hasta kaydı silinemedi!`),
+        error: (err) =>
+          this.toastr.error(
+            `${this.selectedPatient?.firstName} ${this.selectedPatient?.lastName} hasta kaydı silinemedi!`
+          ),
       });
     }
   }
@@ -176,6 +220,8 @@ export class PatientsTableComponent implements OnInit {
   }
 
   getSortIcon() {
-    return this.sortOrder === 'desc' ? 'pi pi-sort-amount-up-alt' : 'pi pi-sort-amount-down-alt';
+    return this.sortOrder === 'desc'
+      ? 'pi pi-sort-amount-up-alt'
+      : 'pi pi-sort-amount-down-alt';
   }
 }

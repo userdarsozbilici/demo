@@ -35,7 +35,7 @@ export class RegisterComponent {
 
     this.authService.register(this.username, this.password).subscribe({
       next: () => {
-        this.toastr.success('Kayıt başarılı! Lütfen giriş yapın.');
+        this.toastr.success(`'${this.username}' kullanıcı başarıyla sisteme kaydedildi. Lütfen giriş yapın.`);
         this.router.navigate(['/login']);
       },
       error: (err) => {

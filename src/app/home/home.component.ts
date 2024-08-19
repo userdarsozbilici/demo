@@ -26,5 +26,9 @@ export class HomeComponent {
     this.router.navigate([`/${page}`]);
   }
 
+  logout(){
+    this.authService.logout();
+  }
+
 
 }

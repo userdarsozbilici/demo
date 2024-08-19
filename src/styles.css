@@ -16,49 +16,78 @@
   justify-content: center;
   align-items: center;
   border-radius: 1vh;
-  padding-top:4vh;
+  padding-top: 4vh;
 }
 
 .anim-bg-gradient {
-    padding: 0.6em 1.2em;
-    border-radius: 0.375em;
-    cursor: pointer;
-    color: black; /* Text color when the background is white */
-    background: white;
-    background-size: 200% 100%;
-    background-position: 100% 0;
-    border: 2px solid darkmagenta; /* Optional: border to match the text color */
-    transition: background 0.8s, color 0.1s;
-    font-weight: 600;
-  }
-  
-  .anim-bg-gradient:hover {
-    color: white;
-    background: linear-gradient(120deg, darkmagenta, crimson, orange);
-    background-position: 0 0;
-  }
+  padding: 0.6em 1.2em;
+  border-radius: 0.375em;
+  cursor: pointer;
+  color: black; /* Text color when the background is white */
+  background: white;
+  background-size: 200% 100%;
+  background-position: 100% 0;
+  border: 2px solid darkmagenta; /* Optional: border to match the text color */
+  transition: background 0.8s, color 0.1s;
+  font-weight: 600;
+}
 
-  .blueish-anim-bg-gradient {
-    padding: 0.6em 1.2em;
-    border-radius: 0.375em;
-    cursor: pointer;
-    color: black; /* Text color when the background is white */
-    background: white;
-    background-size: 200% 100%;
-    background-position: 100% 0;
-    border: 2px solid #039CEA; /* Border to match the text color */
-    transition: background 0.8s, color 0.1s;
+.anim-bg-gradient:hover {
+  color: white;
+  background: linear-gradient(120deg, darkmagenta, crimson, orange);
+  background-position: 0 0;
+}
+
+.blueish-anim-bg-gradient {
+  padding: 0.6em 1.2em;
+  border-radius: 0.375em;
+  cursor: pointer;
+  color: black; /* Text color when the background is white */
+  background: white;
+  background-size: 200% 100%;
+  background-position: 100% 0;
+  border: 2px solid #039cea; /* Border to match the text color */
+  transition: background 0.8s, color 0.1s;
 }
 
 .blueish-anim-bg-gradient:hover {
-    color: black;
-    background: linear-gradient(120deg, #039CEA, #42A5F5, #81D4FA, #81D4FA, #039CEA);
-    background-position: 0 0;
+  color: black;
+  background: linear-gradient(
+    120deg,
+    #039cea,
+    #42a5f5,
+    #81d4fa,
+    #81d4fa,
+    #039cea
+  );
+  background-position: 0 0;
 }
 
+.reddish-anim-bg-gradient {
+  padding: 0.6em 1.2em;
+  border-radius: 0.375em;
+  cursor: pointer;
+  color: black; /* Text color when the background is white */
+  background: white;
+  background-size: 200% 100%;
+  background-position: 100% 0;
+  border: 2px solid #e53935; /* Border to match the text color */
+  transition: background 0.8s, color 0.1s;
+}
+
+.reddish-anim-bg-gradient:hover {
+  color: black;
+  background: linear-gradient(
+    120deg,
+    #b10704,
+    #c2201e,
+    #e68d85,
+    #d1736a,
+    #b10704
+  );
+  background-position: 0 0;
+}
 
 html {
   scroll-behavior: smooth;
 }
-
-  

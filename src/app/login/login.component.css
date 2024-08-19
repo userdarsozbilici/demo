@@ -59,4 +59,10 @@
   .logo {
     width: 100px;
   }
+
+.submit-button{
+  border:none;
+  border-radius: 8px;
+  box-shadow: 0 5px 20px rgba(25, 39, 49, 0.5);
+}
   

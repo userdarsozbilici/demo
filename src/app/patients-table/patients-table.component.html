@@ -47,8 +47,22 @@
           <td>{{ patient.firstName }}</td>
           <td>{{ patient.lastName }}</td>
           <td>{{ patient.birthDate }}</td>
-          <td>{{ patient.birthPlaceName }}</td>
-          <td>{{ patient.residenceName }}</td>
+          <td>
+            <ng-container *ngIf="!loadingBirthPlace; else loading">
+              {{ patient.birthPlaceName }}
+            </ng-container>
+            <ng-template #loading>
+              <i class="pi pi-spin pi-spinner"></i>
+            </ng-template>
+          </td>
+          <td>
+            <ng-container *ngIf="!loadingResidence; else loading">
+              {{ patient.residenceName }}
+            </ng-container>
+            <ng-template #loading>
+              <i class="pi pi-spin pi-spinner"></i>
+            </ng-template>
+          </td>
           <td>{{ getPhoneNumber(patient) }}</td>
           <td>
             <button

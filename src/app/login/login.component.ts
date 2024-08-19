@@ -23,14 +23,14 @@ export class LoginComponent {
 
   onSubmit() {
     if (!this.username || !this.password) {
-      this.toastr.warning('Kullanıcı adı ve Şifre gereklidir.');
+      this.toastr.error('Kullanıcı adı ve Şifre gereklidir.');
       return;
     }
 
     this.authService.login(this.username, this.password).subscribe({
       next: (success) => {
         if (success) {
-          this.toastr.success('Giriş Başarılı!');
+          this.toastr.success(`'${this.username}' kullanıcısı ile sisteme giriş yapıldı.`);
           this.router.navigate(['/home']);
         } else {
           this.toastr.error('Giriş başarısız! Lütfen bilgilerinizi kontrol ediniz.');
