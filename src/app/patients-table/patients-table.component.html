@@ -71,6 +71,7 @@
               icon="pi pi-eye"
               (click)="openModal(patient)"
               pTooltip="Hasta Detayları"
+              [disabled]="loadingBirthPlace || loadingResidence"
             ></button>
           </td>
         </tr>
