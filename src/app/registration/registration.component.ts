@@ -12,7 +12,6 @@ import { ToastrService } from 'ngx-toastr'
 import { ComboBoxComponent } from '../combo-box/combo-box.component'
 import { Router } from '@angular/router'
 import { NavigateHomeButtonComponent } from '../navigate-home-button/navigate-home-button.component'
-
 @Component({
   standalone: true,
   imports: [
@@ -82,8 +81,8 @@ export class RegistrationComponent implements OnInit {
         firstName: formValue.firstName,
         lastName: formValue.lastName,
         birthDate: formValue.birthDate,
-        birthPlace: formValue.birthCounty, 
-        residence: formValue.residenceCounty, 
+        birthPlace: formValue.birthCounty,
+        residence: formValue.residenceCounty,
         address: formValue.address,
         gender: formValue.gender,
         phoneNumbers: [
@@ -100,8 +99,8 @@ export class RegistrationComponent implements OnInit {
           this.toastr.success(
             `${patient.firstName} ${patient.lastName} sisteme başarıyla kaydedildi!`,
           )
-          this.registrationForm.reset() 
-          this.submitted = false 
+          this.registrationForm.reset()
+          this.submitted = false
         },
         error: (error) => console.error('Error creating patient', error),
       })

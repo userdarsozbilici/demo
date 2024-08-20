@@ -1,96 +1,108 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { SearchComponent } from '../search/search.component';
-import { PatientsTableComponent } from '../patients-table/patients-table.component';
-import { PatientService } from '../services/patient.service';
-import { Patient } from '../models/patient.model';
-import { ToastrService } from 'ngx-toastr';
-import { NavigateHomeButtonComponent } from '../navigate-home-button/navigate-home-button.component';
-import { ComboBoxService } from '../services/combo-box.service';
-import { LoadingSpinnerComponent } from '../loading-spinner/loading-spinner.component';
+import { Component } from '@angular/core'
+import { CommonModule } from '@angular/common'
+import { SearchComponent } from '../search/search.component'
+import { PatientsTableComponent } from '../patients-table/patients-table.component'
+import { PatientService } from '../services/patient.service'
+import { Patient } from '../models/patient.model'
+import { ToastrService } from 'ngx-toastr'
+import { NavigateHomeButtonComponent } from '../navigate-home-button/navigate-home-button.component'
+import { ComboBoxService } from '../services/combo-box.service'
+import { LoadingSpinnerComponent } from '../loading-spinner/loading-spinner.component'
 
 @Component({
   standalone: true,
-  imports: [CommonModule, SearchComponent, PatientsTableComponent, NavigateHomeButtonComponent, LoadingSpinnerComponent],
+  imports: [
+    CommonModule,
+    SearchComponent,
+    PatientsTableComponent,
+    NavigateHomeButtonComponent,
+    LoadingSpinnerComponent,
+  ],
   selector: 'app-main-page',
   templateUrl: './main-page.component.html',
-  styleUrls: ['./main-page.component.css']
+  styleUrls: ['./main-page.component.css'],
 })
 export class MainPageComponent {
-  patients: Patient[] = [];
-  searchPerformed = false;
-  loading = false;  // Add this property to track the loading state
+  patients: Patient[] = []
+  searchPerformed = false
+  loading = false
 
-  constructor(private patientService: PatientService, private toastr: ToastrService, private comboBoxService: ComboBoxService) {}
+  constructor(
+    private patientService: PatientService,
+    private toastr: ToastrService,
+    private comboBoxService: ComboBoxService,
+  ) {}
 
-  onSearch(searchCriteria: { searchBy: string, searchTerm: string }) {
-    this.loading = true;  // Set loading to true when starting the search
-    this.patientService.searchPatients(searchCriteria.searchBy, searchCriteria.searchTerm).subscribe({
-      next: (data) => {
-        this.patients = data;
-        this.populateCityNames();
-        this.searchPerformed = true;
-        this.loading = false;  // Set loading to false when data is loaded
-        if (this.patients.length === 0) {
-          this.searchPerformed = false;
-          this.toastr.info('No patients found for the given search criteria');
-        }
-      },
-      error: (err) => {
-        this.loading = false;  // Set loading to false if there's an error
-        console.error('Error fetching patient', err);
-        this.toastr.error('Error fetching patient');
-      }
-    });
+  onSearch(searchCriteria: { searchBy: string; searchTerm: string }) {
+    this.loading = true
+    this.patientService
+      .searchPatients(searchCriteria.searchBy, searchCriteria.searchTerm)
+      .subscribe({
+        next: (data) => {
+          this.patients = data
+          this.populateCityNames()
+          this.searchPerformed = true
+          this.loading = false
+          if (this.patients.length === 0) {
+            this.searchPerformed = false
+            this.toastr.info('No patients found for the given search criteria')
+          }
+        },
+        error: (err) => {
+          this.loading = false
+          console.error('Error fetching patient', err)
+          this.toastr.error('Error fetching patient')
+        },
+      })
   }
 
   showAllPatients() {
-    this.loading = true;  // Set loading to true when starting to fetch all patients
+    this.loading = true
     this.patientService.getAllPatients().subscribe({
       next: (data) => {
-        this.patients = data;
-        this.populateCityNames();
-        this.searchPerformed = true;
-        this.loading = false;  // Set loading to false when data is loaded
+        this.patients = data
+        this.populateCityNames()
+        this.searchPerformed = true
+        this.loading = false
         if (this.patients.length === 0) {
-          this.searchPerformed = false;
-          this.toastr.info('No patients found');
+          this.searchPerformed = false
+          this.toastr.info('No patients found')
         }
       },
       error: (err) => {
-        this.loading = false;  // Set loading to false if there's an error
-        console.error('Error fetching patients', err);
-        this.toastr.error('Hasta bilgileri alınırken bir hata oluştu!');
-      }
-    });
+        this.loading = false
+        console.error('Error fetching patients', err)
+        this.toastr.error('Hasta bilgileri alınırken bir hata oluştu!')
+      },
+    })
   }
 
   resetSearch() {
-    this.searchPerformed = false;
+    this.searchPerformed = false
   }
 
   populateCityNames() {
-    this.patients.forEach(patient => {
-      this.getCityName(patient.birthPlace).then(cityName => {
-        patient.birthPlaceName = cityName;
-      });
-      this.getCityName(patient.residence).then(cityName => {
-        patient.residenceName = cityName;
-      });
-    });
+    this.patients.forEach((patient) => {
+      this.getCityName(patient.birthPlace).then((cityName) => {
+        patient.birthPlaceName = cityName
+      })
+      this.getCityName(patient.residence).then((cityName) => {
+        patient.residenceName = cityName
+      })
+    })
   }
 
   getCityName(countyId: number): Promise<string> {
     return new Promise((resolve, reject) => {
       this.comboBoxService.getCityNameByCountyId(countyId).subscribe({
         next: (name: string) => {
-          resolve(name);
+          resolve(name)
         },
         error: (err) => {
-          console.error("Error fetching city name", err);
-          reject(err);
-        }
-      });
-    });
+          console.error('Error fetching city name', err)
+          reject(err)
+        },
+      })
+    })
   }
 }
