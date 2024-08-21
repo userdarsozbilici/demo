@@ -18,38 +18,47 @@ export class AuthService {
   ) {}
 
   login(username: string, password: string): Observable<boolean> {
-    return this.http
-      .post<any>(`${this.apiUrl}/login`, { username, password })
-      .pipe(
-        map((response) => {
-          if (response.success) {
-            this.setTokens(response.accessToken, response.refreshToken)
-            return true
-          } else {
-            return false
-          }
-        }),
-        catchError((error: HttpErrorResponse) => {
-          return of(false)
-        }),
-      )
+    const headers = {
+      'X-Username': username,
+      'X-Password': password,
+    };
+  
+    return this.http.post<any>(`${this.apiUrl}/login`, null, { headers }).pipe(
+      map((response) => {
+        if (response.success) {
+          this.setTokens(response.accessToken, response.refreshToken);
+          return true;
+        } else {
+          return false;
+        }
+      }),
+      catchError((error: HttpErrorResponse) => {
+        return of(false);
+      })
+    );
   }
+  
 
   register(username: string, password: string): Observable<void> {
-    return this.http
-      .post<any>(`${this.apiUrl}/register`, { username, password })
-      .pipe(
-        map((response) => {
-          if (response.success) {
-            this.router.navigate(['/login'])
-          } else {
-          }
-        }),
-        catchError((error: HttpErrorResponse) => {
-          return of()
-        }),
-      )
+    const headers = {
+      'X-Username': username,
+      'X-Password': password,
+    };
+  
+    return this.http.post<any>(`${this.apiUrl}/register`, null, { headers }).pipe(
+      map((response) => {
+        if (response.success) {
+          this.router.navigate(['/login']);
+        } else {
+          // handle error if needed
+        }
+      }),
+      catchError((error: HttpErrorResponse) => {
+        return of();
+      })
+    );
   }
+  
 
   validateAccessToken(): Observable<boolean> {
     const accessToken = this.getToken()
