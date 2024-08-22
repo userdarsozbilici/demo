@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { DropdownModule } from 'primeng/dropdown';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
+import { LoadingSpinnerComponent } from '../../../common-components/loading-spinner/loading-spinner.component';
 
 @Component({
   selector: 'app-admission-table',
@@ -21,7 +22,8 @@ import { ButtonModule } from 'primeng/button';
     DropdownModule,
     TableModule,
     ButtonModule,
-    NavigateHomeButtonComponent
+    NavigateHomeButtonComponent,
+    LoadingSpinnerComponent
   ]
 })
 export class AdmissionTableComponent implements OnInit {
@@ -32,6 +34,7 @@ export class AdmissionTableComponent implements OnInit {
   rows = 5; // Display 5 admissions per page
   first = 0;
   totalRecords = 0;
+  loading:boolean = true;
 
   constructor(
     private admissionService: AdmissionService,
@@ -41,6 +44,7 @@ export class AdmissionTableComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.loading = true;
     this.fetchPoliclinics();
     this.fetchAdmissions();
   }
@@ -49,9 +53,11 @@ export class AdmissionTableComponent implements OnInit {
     this.policlinicService.getAllPoliclinics().subscribe({
       next: (data) => {
         this.policlinics = [{ label: 'Tümü', value: null }, ...data.map(p => ({ label: p.name, value: p.id }))];
+        this.loading = false;
       },
       error: (error) => {
         console.error('Error fetching policlinics:', error);
+        this.loading = false;
       }
     });
   }
@@ -60,7 +66,7 @@ export class AdmissionTableComponent implements OnInit {
     this.admissionService.getAllAdmissions().subscribe({
       next: (data) => {
         this.admissions = data;
-        this.loadRelatedData();  // Load related data after admissions are fetched
+        this.loadRelatedData();  
       },
       error: (error) => {
         console.error('Error fetching admissions:', error);
@@ -70,7 +76,7 @@ export class AdmissionTableComponent implements OnInit {
 
   loadRelatedData() {
     let completedRequests = 0;
-    const totalRequests = this.admissions.length * 2; // patient and policlinic per admission
+    const totalRequests = this.admissions.length * 2; 
 
     this.admissions.forEach(admission => {
       this.patientService.getPatientById(admission.patientId).subscribe({
@@ -114,6 +120,15 @@ export class AdmissionTableComponent implements OnInit {
 
   onPoliclinicChange() {
     this.filterAdmissions(); 
+  }
+
+  translateAdmissionType(type: string): string {
+    const typeTranslations: { [key: string]: string } = {
+      inpatient: 'Yatan',
+      outpatient: 'Ayakta',
+      daily: 'Günübirlik'
+    };
+    return typeTranslations[type] || type;
   }
 
   onPage(event: any) {
