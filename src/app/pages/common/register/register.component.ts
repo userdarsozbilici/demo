@@ -17,7 +17,7 @@ export class RegisterComponent {
   username: string = '';
   password: string = '';
   confirmPassword: string = '';
-  role: string = '';
+  role: string = ''; 
 
   passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 

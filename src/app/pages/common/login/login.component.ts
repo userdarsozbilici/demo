@@ -3,6 +3,7 @@ import { Router, RouterModule } from '@angular/router'
 import { FormsModule } from '@angular/forms'
 import { AuthService } from '../../../services/auth.service'
 import { ToastrService } from 'ngx-toastr'
+import { RoutingHandlerService } from '../../../services/routing-handler.service'
 
 @Component({
   selector: 'app-login',
@@ -19,6 +20,7 @@ export class LoginComponent {
     private router: Router,
     private authService: AuthService,
     private toastr: ToastrService,
+    private routingHandlerService: RoutingHandlerService
   ) {}
 
   onSubmit() {
@@ -33,7 +35,7 @@ export class LoginComponent {
           this.toastr.success(
             `'${this.username}' kullanıcısı ile sisteme giriş yapıldı.`,
           )
-          this.router.navigate(['/home'])
+          this.routingHandlerService.handleRouting("login")
         } else {
           this.toastr.error(
             'Giriş başarısız! Lütfen bilgilerinizi kontrol ediniz.',

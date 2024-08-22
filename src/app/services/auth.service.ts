@@ -29,6 +29,7 @@ export class AuthService {
         map((response) => {
           if (response.success) {
             this.setTokens(response.accessToken, response.refreshToken)
+            this.setRole(response.role)
             return true
           } else {
             return false
@@ -44,24 +45,25 @@ export class AuthService {
     const headers = {
       'X-Username': username,
       'X-Password': password,
-      'X-Role': role,
-    }
+      'X-Role': role, 
+    };
   
     return this.http
       .post<any>(`${this.apiUrl}/register`, null, { headers })
       .pipe(
         map((response) => {
           if (response.success) {
-            this.router.navigate(['/login'])
+            this.router.navigate(['/login']);
           } else {
+            console.error("Registration failed:", response.message);
           }
         }),
         catchError((error: HttpErrorResponse) => {
-          return of()
+          console.error("HTTP Error:", error);
+          return of();
         }),
-      )
+      );
   }
-  
 
   validateAccessToken(): Observable<boolean> {
     const accessToken = this.getToken()
@@ -98,9 +100,17 @@ export class AuthService {
     return localStorage.getItem('accessToken')
   }
 
+  getRole(): string | null {
+    return localStorage.getItem("role")
+  }
+
   getRefreshToken(): string | null {
     return localStorage.getItem('refreshToken')
   }
+
+  setRole(role:string): void {
+    localStorage.setItem("role", role)
+  } 
 
   setTokens(accessToken: string, refreshToken: string): void {
     localStorage.setItem('accessToken', accessToken)
@@ -110,6 +120,10 @@ export class AuthService {
   clearTokens(): void {
     localStorage.removeItem('accessToken')
     localStorage.removeItem('refreshToken')
+  }
+
+  clearRole(): void {
+    localStorage.removeItem("role")
   }
 
   logout(): void {

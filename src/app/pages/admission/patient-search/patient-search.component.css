@@ -1,0 +1,87 @@
+.patient-search-container {
+    max-width: 600px;
+    width: 100%;
+    margin: auto;
+    padding: 2rem;
+    border-radius: 8px;
+    background: #ffffff;
+    box-shadow: 0 20px 80px rgba(0, 0, 0, 0.4);
+    text-align: center;
+  }
+  
+  .logo {
+    width: 100px;
+    height: auto;
+    display: block;
+    margin: 0 auto 1rem;
+  }
+  
+  h2 {
+    text-align: center;
+    margin-bottom: 0.5rem;
+    color: #333;
+  }
+  
+  p {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #666;
+  }
+  
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .p-field {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .p-field label {
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+  }
+  
+  .p-field input,
+  .p-field p-dropdown {
+    width: 100%;
+  }
+  
+  .form-actions {
+    margin-top: 1.5rem;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+  }
+  
+  button {
+    width: 48%;
+    border: none;
+    font-weight: 600;
+    padding: 1rem;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 8px;
+    box-shadow: 0 5px 50px rgba(25, 39, 49, 0.5);
+  }
+  
+  button.show-all-button {
+    border: none;
+  }
+  
+  .p-error {
+    color: #f44336;
+    font-size: 0.75rem;
+    margin-top: 0.25rem;
+  }
+  
+  .error-message {
+    color: #f44336;
+    text-align: center;
+  }
+  

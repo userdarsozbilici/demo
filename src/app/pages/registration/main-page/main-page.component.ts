@@ -1,6 +1,6 @@
 import { Component } from '@angular/core'
 import { CommonModule } from '@angular/common'
-import { SearchComponent } from '../../common/search/search.component'
+import { SearchComponent } from '../search/search.component'
 import { PatientsTableComponent } from '../../common/patients-table/patients-table.component'
 import { PatientService } from '../../../services/patient.service'
 import { Patient } from '../../../models/patient.model'
@@ -22,7 +22,7 @@ import { LoadingSpinnerComponent } from '../../../common-components/loading-spin
   templateUrl: './main-page.component.html',
   styleUrls: ['./main-page.component.css'],
 })
-export class MainPageComponent {
+export class RegistrationMainPageComponent {
   patients: Patient[] = []
   searchPerformed = false
   loading = false

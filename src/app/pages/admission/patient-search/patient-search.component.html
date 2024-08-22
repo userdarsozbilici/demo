@@ -1,0 +1,32 @@
+<div class="page-background">
+    <app-navigate-home-button></app-navigate-home-button>
+    <div class="patient-search-container">
+      <div class="logo-container">
+        <img src="assets/erc-logo.jpg" alt="ERC Logo" class="logo">
+      </div>
+      <h2>Hasta Arama</h2>
+      <form [formGroup]="patientSearchForm" (ngSubmit)="onSearchPatient()">
+        <div class="form-grid">
+          <div class="p-field">
+            <label for="searchByPatient">Arama Kriteri</label>
+            <p-dropdown [options]="patientSearchOptions" formControlName="searchByPatient" (onChange)="onPatientSearchByChange($event)"></p-dropdown>
+          </div>
+          <div class="p-field">
+            <label for="patientSearchTerm">{{ selectedPatientPlaceholder }}</label>
+            <input id="patientSearchTerm" 
+                   [type]="patientSearchForm.get('searchByPatient')?.value === 'identityNumber' || patientSearchForm.get('searchByPatient')?.value === 'id' ? 'number' : 'text'"
+                   pInputText 
+                   formControlName="patientSearchTerm" 
+                   [placeholder]="selectedPatientPlaceholder"/>
+            <div *ngIf="patientSearchForm.get('patientSearchTerm')?.invalid && (patientSearchForm.get('patientSearchTerm')?.dirty || patientSearchForm.get('patientSearchTerm')?.touched)">
+              <small class="p-error">{{ selectedPatientPlaceholder }} zorunludur</small>
+            </div>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button class="anim-bg-gradient" pButton type="submit" label="Ara"></button>
+        </div>
+      </form>
+    </div>
+  </div>
+  

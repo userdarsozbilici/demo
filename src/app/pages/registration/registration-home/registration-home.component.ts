@@ -6,11 +6,11 @@ import { AuthService } from '../../../services/auth.service'
 @Component({
   standalone: true,
   imports: [CommonModule],
-  selector: 'app-home',
+  selector: 'app-registration-home',
   templateUrl: './registration-home.component.html',
   styleUrls: ['./registration-home.component.css'],
 })
-export class HomeComponent {
+export class RegistrationHomeComponent {
   showHastaIslemleri = false
   constructor(private router: Router, private authService: AuthService) {}
 
