@@ -1,0 +1,95 @@
+<div class="page-background">
+  <div class="form-container">
+    <div class="logo-container">
+      <img src="assets/erc-logo.jpg" alt="ERC Logo" class="logo" />
+    </div>
+    <h2>Kayıt Ol</h2>
+    <form #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)">
+      <div class="form-group">
+        <label for="username">Kullanıcı Adı</label>
+        <input
+          id="username"
+          type="text"
+          [(ngModel)]="username"
+          name="username"
+          required
+          #usernameInput="ngModel"
+        />
+        <div *ngIf="usernameInput.invalid && usernameInput.touched" class="error-message">
+          Kullanıcı adı gereklidir.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Şifre</label>
+        <input
+          id="password"
+          type="password"
+          [(ngModel)]="password"
+          name="password"
+          required
+          [pattern]="passwordPattern"
+          #passwordInput="ngModel"
+        />
+        <small class="password-requirements" style="font-weight: 600; font-style: italic;">
+          Şifreniz en az bir büyük harf, bir küçük harf, bir özel karakter ve bir rakam içermelidir.
+        </small>
+        <div *ngIf="passwordInput.invalid && passwordInput.touched" class="error-text">
+          <small class="password-requirements" style="font-weight: 600; font-style: italic; color: red;">
+            Şifre gereksinimleri karşılanmalıdır.
+          </small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="confirmPassword">Şifreyi Onayla</label>
+        <input
+          id="confirmPassword"
+          type="password"
+          [(ngModel)]="confirmPassword"
+          name="confirmPassword"
+          required
+          #confirmPasswordInput="ngModel"
+        />
+        <div *ngIf="confirmPassword !== password && confirmPasswordInput.touched" class="error-message">
+          <small class="password-requirements" style="font-weight: 600; font-style: italic; color: red;">
+            Şifreler uyuşmuyor.
+          </small>
+        </div>
+      </div>
+
+      
+      <div class="form-group">
+        <label for="role">Rol Seçin</label>
+        <p-dropdown
+          [options]="roles"
+          [(ngModel)]="role"
+          name="role"
+          placeholder="Rol Seçin"
+          required
+          #roleInput="ngModel"
+          optionLabel="label"
+        ></p-dropdown>
+        <div *ngIf="roleInput.invalid && roleInput.touched" class="error-message">
+          <small class="password-requirements" style="font-weight: 600; font-style: italic; color: red;">
+            Birim seçimi zorunludur.
+          </small>
+        </div>
+      </div>
+
+
+      <div class="submit-cont">
+        <button pButton type="submit" label="Register" class="submit-button anim-bg-gradient" [disabled]="!registerForm.valid">
+          Kayıt Ol
+        </button>
+      </div>
+
+      <div class="form-footer">
+        <p>
+          Hesabınız varsa lütfen
+          <a routerLink="/login">giriş yapın</a>
+        </p>
+      </div>
+    </form>
+  </div>
+</div>
