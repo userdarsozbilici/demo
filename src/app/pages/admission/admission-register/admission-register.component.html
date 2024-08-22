@@ -1,0 +1,108 @@
+<div class="page-background">
+  <app-navigate-home-button></app-navigate-home-button>
+  <div class="admission-register-container">
+    <div class="logo-container">
+      <img src="assets/erc-logo.jpg" alt="ERC Logo" class="logo">
+    </div>
+    <h2>Hasta Kabul</h2>
+    <div class="admission-content">
+      <div class="patient-info">
+        <h3>Hasta Bilgileri</h3>
+        <div class="patient-details-row">
+          <p><strong>Ad:</strong> {{ patient.firstName }}</p>
+          <p><strong>Soyad:</strong> {{ patient.lastName }}</p>
+        </div>
+        <p><strong>TC Kimlik:</strong> {{ patient.identityNumber }}</p>
+        <button
+          pButton
+          type="button"
+          class="anim-bg-gradient icon-button-small"
+          icon="pi pi-eye"
+          (click)="openDetailsDialog()"
+        ></button>
+      </div>
+
+      <div class="vertical-line"></div>
+
+      <div class="admission-form">
+        <h3>Hasta Kabul Bilgileri</h3>
+        <form [formGroup]="admissionForm" (ngSubmit)="onSubmit()">
+          <div class="form-grid">
+            <div class="p-field">
+              <label for="admissionType">Kabul Türü</label>
+              <p-dropdown
+                id="admissionType"
+                [options]="admissionTypes"
+                formControlName="admissionType"
+                placeholder="Seçiniz"
+              ></p-dropdown>
+            </div>
+            <div class="p-field">
+              <label for="policlinic">Poliklinik</label>
+              <p-dropdown
+                id="policlinic"
+                [options]="policlinics"
+                formControlName="policlinic"
+                placeholder="Seçiniz"
+              ></p-dropdown>
+            </div>
+            <div class="p-field">
+              <label for="note">Not</label>
+              <textarea
+                id="note"
+                pInputTextarea
+                formControlName="note"
+              ></textarea>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button
+              class="submit-button anim-bg-gradient"
+              pButton
+              type="submit"
+              label="Kaydet"
+            ></button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <p-dialog
+    header="Hasta Detayları"
+    [(visible)]="showDetailsDialog"
+    [modal]="true"
+    [style]="{ width: '60vw' }"
+    (onHide)="closeDetailsDialog()"
+  >
+    <div class="patient-details-grid">
+      <div>
+        <p><strong>Ad:</strong> {{ patient.firstName }}</p>
+        <p><strong>Soyad:</strong> {{ patient.lastName }}</p>
+        <p><strong>TC Kimlik:</strong> {{ patient.identityNumber }}</p>
+        <p><strong>Doğum Tarihi:</strong> {{ patient.birthDate }}</p>
+        <p><strong>Doğum Yeri:</strong> {{ patient.birthPlaceName }}</p>
+      </div>
+      <div>
+        <p><strong>Yaşadığı Yer:</strong> {{ patient.residenceName }}</p>
+        <p><strong>Adres:</strong> {{ patient.address }}</p>
+        <p><strong>Cinsiyet:</strong> {{ patient.gender }}</p>
+        <p><strong>Telefon Numaraları:</strong></p>
+        <ul>
+          <li *ngIf="patient.phoneNumbers[0]?.mobilePhone"><strong>Cep Telefonu:</strong> {{ patient.phoneNumbers[0].mobilePhone }}</li>
+          <li *ngIf="patient.phoneNumbers[0]?.officePhone"><strong>İş Telefonu:</strong> {{ patient.phoneNumbers[0].officePhone }}</li>
+          <li *ngIf="patient.phoneNumbers[0]?.homePhone"><strong>Ev Telefonu:</strong> {{ patient.phoneNumbers[0].homePhone }}</li>
+        </ul>
+      </div>
+    </div>
+    <ng-template pTemplate="footer">
+      <button
+        pButton
+        type="button"
+        label="Kapat"
+        class="anim-bg-gradient" style="border: none; box-shadow: 0 5px 50px rgba(25, 39, 49, 0.5);"
+        (click)="closeDetailsDialog()"
+      ></button>
+    </ng-template>
+  </p-dialog>
+</div>

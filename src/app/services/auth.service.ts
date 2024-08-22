@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core'
 import { HttpClient, HttpErrorResponse } from '@angular/common/http'
 import { Router } from '@angular/router'
 import { ToastrService } from 'ngx-toastr'
-import { Observable, of } from 'rxjs'
+import { identity, Observable, of } from 'rxjs'
 import { catchError, map, switchMap } from 'rxjs/operators'
+
 
 @Injectable({
   providedIn: 'root',
@@ -30,6 +31,7 @@ export class AuthService {
           if (response.success) {
             this.setTokens(response.accessToken, response.refreshToken)
             this.setRole(response.role)
+            this.setUserId(response.id)
             return true
           } else {
             return false
@@ -104,6 +106,12 @@ export class AuthService {
     return localStorage.getItem("role")
   }
 
+  getUserId(): number | null {
+    const userId = localStorage.getItem("userId");
+    return userId ? parseInt(userId, 10) : null;
+  }
+  
+
   getRefreshToken(): string | null {
     return localStorage.getItem('refreshToken')
   }
@@ -112,6 +120,10 @@ export class AuthService {
     localStorage.setItem("role", role)
   } 
 
+  setUserId(userId: number): void {
+    localStorage.setItem("userId", userId.toString());
+  }
+  
   setTokens(accessToken: string, refreshToken: string): void {
     localStorage.setItem('accessToken', accessToken)
     localStorage.setItem('refreshToken', refreshToken)

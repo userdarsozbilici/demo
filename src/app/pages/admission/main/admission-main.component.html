@@ -1,8 +1,12 @@
 <div class="admission-main-container">
-    <app-patient-search (searchPatient)="onPatientSearch($event)" ></app-patient-search>
-  
-    <div *ngIf="patientSelected" class="admission-form-container">
-   
-    </div>
+  <div *ngIf="!patientSelected" class="admission-form-container">
+      <app-patient-search (searchPatient)="onPatientSearch($event)"></app-patient-search>
   </div>
-  
+
+  <div *ngIf="patientSelected && selectedPatient" class="admission-form-container">
+      <app-admission-register 
+        [patient]="selectedPatient!" 
+        (admissionRegistered)="onAdmissionRegistered()"
+      ></app-admission-register>
+  </div>
+</div>
