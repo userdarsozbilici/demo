@@ -1,7 +1,7 @@
 import { Component } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { SearchComponent } from '../search/search.component'
-import { PatientsTableComponent } from '../../common/patients-table/patients-table.component'
+import { PatientsTableComponent } from '../patients-table/patients-table.component'
 import { PatientService } from '../../../services/patient.service'
 import { Patient } from '../../../models/patient.model'
 import { ToastrService } from 'ngx-toastr'

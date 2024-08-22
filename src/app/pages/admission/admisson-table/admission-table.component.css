@@ -1,0 +1,61 @@
+.admission-container {
+  width: 80%;
+  margin: auto;
+  padding: 1rem;
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 20px 80px rgba(0, 0, 0, 0.4);
+}
+
+.admission-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.admission-logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.admission-logo {
+  width: 100px;
+  height: auto;
+}
+
+.policlinic-dropdown {
+  width: 200px;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.admission-datatable {
+  width: 100%;
+}
+
+.admission-datatable th,
+.admission-datatable td {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 150px;
+}
+
+.delete-admission-button {
+  font-weight: 600;
+  border: solid 0.15rem;
+  background-color: white;
+  color: #dc3545;
+  border-color: #dc3545;
+}
+
+.delete-admission-button:hover {
+  font-weight: 600;
+  background-color: #dc3545;
+  color: white;
+}

@@ -19,4 +19,8 @@ export class PoliclinicService {
   getAllPoliclinics(): Observable<Policlinic[]> {
     return this.http.get<Policlinic[]>(`${this.apiUrl}`);
   }
+
+  getPoliclinicById(id: number): Observable<Policlinic> {
+    return this.http.get<Policlinic>(`${this.apiUrl}/${id}`);
+  }
 }

@@ -1,0 +1,62 @@
+<div class="page-background">
+  <app-navigate-home-button></app-navigate-home-button>
+  <div class="admission-container">
+    <div class="admission-header">
+      <div class="admission-logo-container">
+        <img src="assets/erc-logo.jpg" alt="ERC Logo" class="admission-logo" />
+      </div>
+      <p-dropdown
+        [options]="policlinics"
+        [(ngModel)]="selectedPoliclinic"
+        (onChange)="onPoliclinicChange()"
+        placeholder="Poliklinik Seçin"
+        class="policlinic-dropdown"
+      ></p-dropdown>
+    </div>
+    <h2>Hasta Kabul Tablosu</h2>
+    <p-table
+  [value]="filteredAdmissions"
+  [paginator]="true"
+  [rows]="rows"
+  [totalRecords]="totalRecords"
+  [(first)]="first"
+  (onPage)="onPage($event)"
+  class="admission-datatable"
+>
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Hasta No</th>
+      <th>TC Kimlik</th>
+      <th>İsim</th>
+      <th>Soyisim</th>
+      <th>Kabul Türü</th>
+      <th>Poliklinik</th>
+      <th>Not</th>
+      <th>İşlemler</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-admission>
+    <tr>
+      <td>{{ admission.patientId }}</td>
+      <td>{{ admission.patientIdentityNumber }}</td>
+      <td>{{ admission.patientFirstName }}</td>
+      <td>{{ admission.patientLastName }}</td>
+      <td>{{ admission.type }}</td>
+      <td>{{ admission.policlinicName }}</td>
+      <td>{{ admission.note }}</td>
+      <td>
+        <button
+          pButton
+          type="button"
+          icon="pi pi-trash"
+          (click)="deleteAdmission(admission.id)"
+          pTooltip="Hasta Kabul Sil"
+          class="delete-admission-button"
+        ></button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+  </div>
+</div>

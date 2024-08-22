@@ -9,7 +9,7 @@ import { ComboBoxService } from '../../../services/combo-box.service'
 import { NavigateHomeButtonComponent } from '../../../common-components/navigate-home-button/navigate-home-button.component'
 import { ToastrService } from 'ngx-toastr'
 import { ComboBoxComponent } from '../../../common-components/combo-box/combo-box.component'
-import { PatientDetailsModalComponent } from '../components/patient-details-modal/patient-details-modal.component'
+import { PatientDetailsModalComponent } from '../patient-details-modal/patient-details-modal.component'
 @Component({
   standalone: true,
   imports: [

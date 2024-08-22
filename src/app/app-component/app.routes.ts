@@ -8,6 +8,7 @@ import { LoginComponent } from '../pages/common/login/login.component'
 import { AuthGuard, PreventAuthAccessGuard } from '../helpers/guards/auth-guard/auth.guard'
 import { AdmissionHomeComponent } from '../pages/admission/admission-home/admission-home.component'
 import { AdmissionMainComponent } from '../pages/admission/main/admission-main.component'
+import { AdmissionTableComponent } from '../pages/admission/admisson-table/admission-table.component'
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -16,6 +17,7 @@ export const routes: Routes = [
   { path: 'registration-home', component: RegistrationHomeComponent, canActivate: [AuthGuard] },
   { path: 'admission-home', component: AdmissionHomeComponent, canActivate: [AuthGuard] },
   { path: 'admission-main', component: AdmissionMainComponent, canActivate: [AuthGuard] },
+  { path: 'admission-table', component: AdmissionTableComponent, canActivate: [AuthGuard] },
   {
     path: 'dashboard',
     component: DashboardComponent,

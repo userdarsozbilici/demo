@@ -7,7 +7,7 @@ import {
   OnChanges,
   SimpleChanges,
 } from '@angular/core'
-import { Patient } from '../../../../models/patient.model'
+import { Patient } from '../../../models/patient.model'
 import {
   FormGroup,
   FormControl,
@@ -18,8 +18,8 @@ import { CommonModule } from '@angular/common'
 import { DialogModule } from 'primeng/dialog'
 import { ButtonModule } from 'primeng/button'
 import { FormsModule } from '@angular/forms'
-import { ComboBoxService } from '../../../../services/combo-box.service'
-import { ComboBoxComponent } from '../../../../common-components/combo-box/combo-box.component'
+import { ComboBoxService } from '../../../services/combo-box.service'
+import { ComboBoxComponent } from '../../../common-components/combo-box/combo-box.component'
 @Component({
   standalone: true,
   imports: [
@@ -32,7 +32,7 @@ import { ComboBoxComponent } from '../../../../common-components/combo-box/combo
   ],
   selector: 'app-patient-details-modal',
   templateUrl: './patient-details-modal.component.html',
-  styleUrls: ['../../patients-table/patients-table.component.css'],
+  styleUrls: ['../patients-table/patients-table.component.css'],
 })
 export class PatientDetailsModalComponent implements OnInit, OnChanges {
   @Input() displayModal = false

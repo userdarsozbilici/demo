@@ -52,7 +52,7 @@
     width: 30px;
     height: 30px;
     padding: 0;
-    border-radius: 50%;
+    border-radius: 15%;
     border: 0.05rem solid black;
     box-shadow: 0 5px 50px rgba(25, 39, 49, 0.5);
   }

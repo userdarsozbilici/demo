@@ -28,6 +28,10 @@ export class PatientService {
     return this.http.delete(`${this.apiUrl}/delete/${id}`)
   }
 
+  getPatientById(id: number): Observable<Patient> {
+    return this.http.get<Patient>(`${this.apiUrl}/get/${id}`);
+  }
+
   searchPatients(searchBy: string, searchTerm: string): Observable<Patient[]> {
     let params = new HttpParams()
     if (searchBy === 'nameSurname') {
