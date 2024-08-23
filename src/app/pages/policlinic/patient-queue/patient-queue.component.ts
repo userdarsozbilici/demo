@@ -5,15 +5,17 @@ import { Subscription, interval, forkJoin } from 'rxjs';
 import { Admission } from '../../../models/admission.model';
 import { AdmissionService } from '../../../services/admission.service';
 import { PatientService } from '../../../services/patient.service';
+import { PoliclinicService } from '../../../services/policlinic.service'; // Import PoliclinicService
 import { Patient } from '../../../models/patient.model';
+import { LoadingSpinnerComponent } from '../../../common-components/loading-spinner/loading-spinner.component';
 
 @Component({
   selector: 'app-patient-queue',
   standalone: true,
   templateUrl: './patient-queue.component.html',
   styleUrls: ['./patient-queue.component.css'],
-  imports: [CommonModule, TableModule],
-  providers: [AdmissionService, PatientService]
+  imports: [CommonModule, TableModule, LoadingSpinnerComponent],
+  providers: [AdmissionService, PatientService, PoliclinicService, LoadingSpinnerComponent] // Provide PoliclinicService
 })
 export class PatientQueueComponent implements OnInit, OnDestroy {
   currentPatient: { admission: Admission, patient: Patient } | null = null;
@@ -23,13 +25,17 @@ export class PatientQueueComponent implements OnInit, OnDestroy {
   private pageChangeSubscription!: Subscription;
   first = 0;
   rows = 3;  // Number of rows per page
+  policlinicName: string = ''; // Variable to store the policlinic name
+  loading: boolean = true; // Loading state
 
   constructor(
     private admissionService: AdmissionService,
-    private patientService: PatientService
+    private patientService: PatientService,
+    private policlinicService: PoliclinicService // Inject PoliclinicService
   ) {}
 
   ngOnInit(): void {
+    this.loadPoliclinicData();
     this.loadQueueData();
     this.startPolling();
     this.startPageChange();
@@ -40,11 +46,32 @@ export class PatientQueueComponent implements OnInit, OnDestroy {
     this.stopPageChange();
   }
 
+  loadPoliclinicData() {
+    const policlinicId = this.getPoliclinicIdFromLocalStorage();
+
+    if (policlinicId) {
+      this.policlinicService.getPoliclinicById(policlinicId).subscribe(
+        (policlinic) => {
+          this.policlinicName = policlinic.name;
+          this.loading = false;
+        },
+        (error) => {
+          console.error('Failed to load policlinic:', error);
+          this.loading = false;
+        }
+      );
+    } else {
+      this.policlinicName = 'Unknown Policlinic';
+      this.loading = false;
+    }
+  }
+
   loadQueueData() {
     const policlinicId = this.getPoliclinicIdFromLocalStorage();
-    
+
     if (!policlinicId) {
       console.error('Policlinic ID is not available in local storage.');
+      this.loading = false;
       return;
     }
 
@@ -72,11 +99,13 @@ export class PatientQueueComponent implements OnInit, OnDestroy {
             patient: patients[index + 1]
           }));
           this.updatePaginatedQueue();
+          this.loading = false;
         });
       } else {
         this.currentPatient = null;
         this.queue = [];
         this.paginatedQueue = [];
+        this.loading = false;
       }
     });
   }

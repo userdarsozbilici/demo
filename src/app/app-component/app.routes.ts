@@ -14,7 +14,6 @@ import { PatientQueueComponent } from '../pages/policlinic/patient-queue/patient
 import { PoliclinicHomeComponent } from '../pages/policlinic/policlinic-home/policlinic-home.component'
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'administration-home', component: AdministrationHomeComponent },

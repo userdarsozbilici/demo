@@ -1,9 +1,14 @@
 <div class="page-background">
-  <div class="queue-container">
+  <div *ngIf="loading">
+    <app-loading-spinner></app-loading-spinner>
+  </div>
+
+  <div *ngIf="!loading" class="queue-container">
     <div class="queue-header">
       <div class="queue-logo-container">
         <img src="assets/erc-logo.jpg" alt="ERC Logo" class="queue-logo" />
       </div>
+      <h1 style="margin-left: 5%;">{{ policlinicName }} Polikliniği</h1> 
     </div>
 
     <div *ngIf="currentPatient" class="current-patient">
@@ -29,14 +34,12 @@
             <td>{{ getOrderNumber(i) }}</td>
             <td>{{ entry.patient.firstName || '' }}</td>
             <td>{{ entry.patient.lastName || '' }}</td>
-            <td>{{ getTypeLabel(entry) }}</td> <!-- Pass entry as argument -->
+            <td>{{ getTypeLabel(entry) }}</td>
           </tr>
         </ng-template>
       </p-table>
     </div>
     
-    
-
     <div *ngIf="!currentPatient && queue.length === 0" class="no-patient-message">
       <p>Şu anda bekleyen hasta yok.</p>
     </div>
