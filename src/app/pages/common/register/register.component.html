@@ -24,29 +24,58 @@
           </div>
         </div>
 
-        <div class="form-group">
-          <label for="role">Rol Seçin</label>
-          <p-dropdown
-            [options]="roles"
-            [(ngModel)]="role"
-            name="role"
-            placeholder="Rol Seçin"
-            required
-            #roleInput="ngModel"
-            optionLabel="label"
-            optionValue="value"
-          ></p-dropdown>
+        <div class="form-group role-policlinic-group">
+          <div class="role-dropdown">
+            <label for="role">Rol Seçin</label>
+            <p-dropdown
+              [options]="roles"
+              [(ngModel)]="role"
+              name="role"
+              placeholder="Rol Seçin"
+              required
+              #roleInput="ngModel"
+              optionLabel="label"
+              optionValue="value"
+            ></p-dropdown>
 
-          <div
-            *ngIf="roleInput.invalid && roleInput.touched"
-            class="error-message"
-          >
-            <small
-              class="password-requirements"
-              style="font-weight: 600; font-style: italic; color: red"
+            <div
+              *ngIf="roleInput.invalid && roleInput.touched"
+              class="error-message"
             >
-              Birim seçimi zorunludur.
-            </small>
+              <small
+                class="password-requirements"
+                style="font-weight: 600; font-style: italic; color: red"
+              >
+                Birim seçimi zorunludur.
+              </small>
+            </div>
+          </div>
+
+          <!-- Conditional Dropdown for Policlinic -->
+          <div class="policlinic-dropdown" *ngIf="role === 'policlinic'" style="margin-top: 5%;">
+            <label for="policlinic">Poliklinik Seçin</label>
+            <p-dropdown
+              [options]="policlinics"
+              [(ngModel)]="selectedPoliclinicId"
+              name="policlinic"
+              placeholder="Poliklinik Seçin"
+              required
+              #policlinicInput="ngModel"
+              optionLabel="name"
+              optionValue="id"
+            ></p-dropdown>
+
+            <div
+              *ngIf="policlinicInput.invalid && policlinicInput.touched"
+              class="error-message"
+            >
+              <small
+                class="password-requirements"
+                style="font-weight: 600; font-style: italic; color: red"
+              >
+                Poliklinik seçimi zorunludur.
+              </small>
+            </div>
           </div>
         </div>
 

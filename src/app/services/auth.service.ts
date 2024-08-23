@@ -29,26 +29,35 @@ export class AuthService {
       .pipe(
         map((response) => {
           if (response.success) {
-            this.setTokens(response.accessToken, response.refreshToken)
-            this.setRole(response.role)
-            this.setUserId(response.id)
-            return true
+            this.setTokens(response.accessToken, response.refreshToken);
+            this.setRole(response.role);
+            this.setUserId(response.id);
+
+            if (response.role === 'policlinic' && response.policlinicId) {
+              this.setPoliclinicId(response.policlinicId);
+            }
+
+            return true;
           } else {
-            return false
+            return false;
           }
         }),
         catchError((error: HttpErrorResponse) => {
-          return of(false)
+          return of(false);
         }),
-      )
+      );
   }
 
-  register(username: string, password: string, role: string): Observable<void> {
+
+  register(username: string, password: string, role: string, policlinicId?: number): Observable<void> {
     const headers = {
       'X-Username': username,
       'X-Password': password,
-      'X-Role': role, 
+      'X-Role': role,
+      'X-Policlinic-Id': policlinicId ? policlinicId.toString() : '' // Add the policlinicId to headers if it exists
     };
+
+    console.log("registerr")
   
     return this.http
       .post<any>(`${this.apiUrl}/register`, null, { headers })
@@ -66,6 +75,7 @@ export class AuthService {
         }),
       );
   }
+  
 
   validateAccessToken(): Observable<boolean> {
     const accessToken = this.getToken()
@@ -137,6 +147,20 @@ export class AuthService {
   clearRole(): void {
     localStorage.removeItem("role")
   }
+
+  getPoliclinicId(): number | null {
+    const policlinicId = localStorage.getItem("policlinicId");
+    return policlinicId ? parseInt(policlinicId, 10) : null;
+  }
+  
+  setPoliclinicId(policlinicId: number): void {
+    localStorage.setItem("policlinicId", policlinicId.toString());
+  }
+  
+  clearPoliclinicId(): void {
+    localStorage.removeItem("policlinicId");
+  }
+  
 
   logout(): void {
     const username = this.getUsernameFromToken()

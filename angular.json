@@ -55,6 +55,7 @@
               "extractLicenses": false,
               "sourceMap": true
             }
+            
           },
           "defaultConfiguration": "production"
         },

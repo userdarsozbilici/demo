@@ -12,26 +12,31 @@ export class AdmissionService {
 
   constructor(private http: HttpClient) { }
 
-  // Fetch all admissions
   getAllAdmissions(): Observable<Admission[]> {
     return this.http.get<Admission[]>(`${this.apiUrl}/all`);
   }
 
   getAdmissionById(id: number): Observable<Admission> {
-    return this.http.get<Admission>(`${this.apiUrl}${id}`);
+    return this.http.get<Admission>(`${this.apiUrl}/${id}`);
   }
 
   createAdmission(admission: Admission): Observable<Admission> {
     return this.http.post<Admission>(`${this.apiUrl}/create`, admission);
   }
 
-  // Update an existing admission
   updateAdmission(id: number, admission: Admission): Observable<Admission> {
     return this.http.put<Admission>(`${this.apiUrl}/update/${id}`, admission);
   }
 
-  // Delete an admission by ID
   deleteAdmission(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/delete/${id}`);
+  }
+
+  closeAdmission(id: number): Observable<Admission> {
+    return this.http.put<Admission>(`${this.apiUrl}/close/${id}`, null);
+  }
+
+  getOpenedAdmissionsByTypeAndPoliclinic(type: string, policlinicId: number): Observable<Admission[]> {
+    return this.http.get<Admission[]>(`${this.apiUrl}/type/${type}/policlinic/${policlinicId}/status/opened`);
   }
 }

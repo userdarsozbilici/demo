@@ -1,0 +1,181 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
+
+.queue-container {
+  width: 70%;
+  margin: auto;
+  padding: 1rem;
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 20px 80px rgba(0, 0, 0, 0.4);
+}
+
+.queue-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.queue-logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.queue-logo {
+  width: 100px;
+  height: auto;
+}
+
+.queue-title {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #0d6efd;
+}
+
+.current-patient {
+  position: relative;
+  padding: 2rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: #ffffff;
+  background: linear-gradient(120deg, #932ef1, #832157, #802af1);
+  background-size: 300% 100%;
+  animation: animate-bg 5s linear infinite;
+  box-shadow: 0 20px 80px rgba(0, 0, 0, 0.4);
+  min-height: 200px;
+  display: flex;          
+  justify-content: center; 
+  align-items: center;     
+}
+
+.current-patient-text-container {
+  position: relative;
+  display: inline-block;
+  padding: 1.5rem 2rem; 
+  border-radius: 8px;
+  background-color: rgba(0, 0, 0, 0.6); 
+  z-index: 2; 
+  max-width: 80%; 
+}
+
+.current-patient-text-container h3,
+.current-patient-text-container p {
+  margin: 0;
+  color: #ffffff;
+  font-size: 1.5rem;
+}
+
+@keyframes animate-bg {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.queue-list {
+  margin-bottom: 2rem;
+}
+
+.queue-list h3 {
+  color: #212529;
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.queue-table {
+  width: 100%;
+  border-spacing: 0;
+  border-collapse: collapse;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #ffffff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.queue-table th,
+.queue-table td {
+  padding: 0.75rem 1rem;
+  text-align: center; 
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.queue-table th {
+  background-color: #f5f5f5;
+  color: #000000;
+  font-weight: 600;
+  border-bottom: 2px solid #230f36; 
+}
+
+.queue-table td {
+  border-bottom: 1px solid #e0e0e0; 
+  color: #333; 
+}
+
+.queue-table tr:nth-child(even) td {
+  background-color: #f9f9f9;
+}
+
+.queue-table tr:hover td {
+  background-color: #dfc9ff; 
+
+}
+
+.queue-table th {
+  font-size: 1rem;
+}
+
+.queue-table td {
+  font-size: 0.95rem;
+}
+
+.no-patient-message {
+  text-align: center;
+  color: #6c757d;
+  font-size: 1.25rem;
+  margin-top: 2rem;
+}
+
+
+.sliding-text-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden; 
+  background-color: #f5f5f5; 
+  padding: 0.5rem 0; 
+  margin-top: 1rem;
+  height: 2rem; 
+  display: flex;
+  align-items: center;
+}
+
+.sliding-text {
+  display: inline-block;
+  padding-left: 100%;
+  white-space: nowrap;
+  box-sizing: content-box;
+  animation: slideText 15s linear infinite; 
+  color: #2e0d4d;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+@keyframes slideText {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%); 
+  }
+}

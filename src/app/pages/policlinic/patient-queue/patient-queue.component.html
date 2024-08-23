@@ -1,0 +1,48 @@
+<div class="page-background">
+  <div class="queue-container">
+    <div class="queue-header">
+      <div class="queue-logo-container">
+        <img src="assets/erc-logo.jpg" alt="ERC Logo" class="queue-logo" />
+      </div>
+    </div>
+
+    <div *ngIf="currentPatient" class="current-patient">
+      <div class="current-patient-text-container">
+        <h3>Şu Anki Hasta</h3>
+        <p><strong>{{ currentPatient.patient.firstName }} {{ currentPatient.patient.lastName }}</strong></p>
+      </div>
+    </div>
+    
+    <div *ngIf="queue.length > 0" class="queue-list">
+      <h3>Sıradaki Hastalar:</h3>
+      <p-table [value]="paginatedQueue" class="queue-table">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Sıra No</th>
+            <th>İsim</th>
+            <th>Soyisim</th>
+            <th>Kabul Türü</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-entry let-i="rowIndex">
+          <tr>
+            <td>{{ getOrderNumber(i) }}</td>
+            <td>{{ entry.patient.firstName || '' }}</td>
+            <td>{{ entry.patient.lastName || '' }}</td>
+            <td>{{ getTypeLabel(entry) }}</td> <!-- Pass entry as argument -->
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+    
+    
+
+    <div *ngIf="!currentPatient && queue.length === 0" class="no-patient-message">
+      <p>Şu anda bekleyen hasta yok.</p>
+    </div>
+
+    <div class="sliding-text-container">
+      <p class="sliding-text">Tüm hakları ERC Grup Mühendislik ve Ar-Ge A.Ş.'ne aittir. Tüm hastalara acil şifalar dileriz...</p>
+    </div>
+  </div>
+</div>

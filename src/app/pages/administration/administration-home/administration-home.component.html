@@ -1,0 +1,19 @@
+<div class="page-background">
+    <div class="admin-home-container">
+      <div class="admin-home-logo-container">
+        <img src="assets/erc-logo.jpg" alt="ERC Logo" class="admin-home-logo" />
+      </div>
+  
+      <div class="admin-home-title-container">
+        <h2>ERC Yönetim Paneli</h2>
+        <p>Yönetim Arayüzüne Hoşgeldiniz!</p>
+      </div>
+  
+      <div class="admin-home-actions">
+        <button pButton type="button" label="Hasta Kayıt" class="anim-bg-gradient admin-home-action-button" (click)="navigateTo('registration-home')">Hasta Kayıt</button>
+        <button pButton type="button" label="Hasta Kabul" class="anim-bg-gradient admin-home-action-button" (click)="navigateTo('admission-home')">Hasta Kabul</button>
+        <button pButton type="button" icon="pi pi-arrow-left" class="reddish-anim-bg-gradient admin-back-button" (click)="logout()">Çıkış Yap</button>
+      </div>
+    </div>
+  </div>
+  

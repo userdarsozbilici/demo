@@ -45,7 +45,7 @@ export class AdmissionRegisterComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private policlinicService: PoliclinicService,
-    private admissionService: AdmissionService,
+    private admissionService : AdmissionService,
     private authService: AuthService,
     private toastr: ToastrService
   ) {
