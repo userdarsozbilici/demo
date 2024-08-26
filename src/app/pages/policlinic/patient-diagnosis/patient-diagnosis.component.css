@@ -1,0 +1,189 @@
+.diagnosis-content-container {
+  width: 80%;
+  margin: auto;
+  padding: 2rem;
+  border-radius: 16px;
+  background:#ffff;
+  box-shadow: 0 20px 80px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.logo-container {
+  margin-bottom: 1rem;
+}
+
+.logo {
+  width: 100px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.diagnosis-header-section {
+  margin-bottom: 2rem;
+}
+
+.step-content.two-columns {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.column {
+  flex: 1;
+}
+
+.info-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.vertical-line {
+  width: 2px;
+  background-color: #ccc;
+}
+
+.patient-info-section {
+  background: #ffffff;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  text-align: center;
+}
+
+.patient-info-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar-image {
+  background: linear-gradient(to top right, #d2e4fd, #277DD5);
+  width: 80px;
+  height: 80px;
+  padding: 0.3rem;
+  border-radius: 20%;
+  margin-right: 2rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.female-avatar-image {
+  background: linear-gradient(to top right, #d2e4fd, #FE698A);
+  width: 80px;
+  height: 80px;
+  padding: 0.3rem;
+  border-radius: 20%;
+  margin-right: 2rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.patient-details {
+  text-align: left;
+}
+
+.patient-info-section h3 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  color: #333;
+  text-align: center;
+}
+
+.note-section h3,
+.potential-diagnosis-section h3,
+.diagnosis-form-section h3,
+.prescription-section h3 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.patient-info-section p,
+.note-section p,
+.potential-diagnosis-section p,
+.prescription-section p {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  color: #555;
+}
+
+.diagnosis-textarea {
+  width: 100%;
+  padding: 0.7rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  resize: none;
+}
+
+.prescription-list-section ul {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 1rem;
+}
+
+.prescription-list-section li {
+  background: #f2f4f8;
+  padding: 0.5rem;
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.prescription-list-section li i {
+  cursor: pointer;
+  color: #e74c3c;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.next-button,
+.save-button,
+.cancel-button {
+  width: 48%;
+  padding: 0.8rem;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  transition: background 0.3s ease;
+  box-shadow: 0 5px 50px rgba(25, 39, 49, 0.5);
+}
+
+.prescription-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columns */
+  gap: 1rem; /* Space between grid items */
+  margin-top: 1rem;
+  min-height: 150px; /* Ensure minimum height for the grid */
+    padding: 0.7rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.drug-item {
+  background: #f2f4f8;
+  padding: 0.5rem;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.drug-item i {
+  cursor: pointer;
+  color: #e74c3c;
+}
+
+.drug-item.empty {
+  visibility: hidden; /* Hide the empty placeholders */
+}
+
+

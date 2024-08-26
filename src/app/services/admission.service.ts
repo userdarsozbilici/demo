@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Admission } from '../models/admission.model';
+import { PotentialDiagnosis } from '../models/potential-diagnosis.model'; // Import the model
 
 @Injectable({
   providedIn: 'root'
@@ -38,5 +39,9 @@ export class AdmissionService {
 
   getOpenedAdmissionsByTypeAndPoliclinic(type: string, policlinicId: number): Observable<Admission[]> {
     return this.http.get<Admission[]>(`${this.apiUrl}/type/${type}/policlinic/${policlinicId}/status/opened`);
+  }
+
+  getPotentialDiagnosesByAdmissionId(id: number): Observable<PotentialDiagnosis[]> {
+    return this.http.get<PotentialDiagnosis[]>(`${this.apiUrl}/${id}/potential-diagnoses`);
   }
 }

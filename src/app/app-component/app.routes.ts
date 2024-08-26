@@ -12,6 +12,7 @@ import { AdmissionTableComponent } from '../pages/admission/admisson-table/admis
 import { AdministrationHomeComponent } from '../pages/administration/administration-home/administration-home.component'
 import { PatientQueueComponent } from '../pages/policlinic/patient-queue/patient-queue.component'
 import { PoliclinicHomeComponent } from '../pages/policlinic/policlinic-home/policlinic-home.component'
+import { PatientDiagnosisComponent } from '../pages/policlinic/patient-diagnosis/patient-diagnosis.component'
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -35,5 +36,6 @@ export const routes: Routes = [
 
   { path: 'policlinic-home', component: PoliclinicHomeComponent, canActivate: [AuthGuard] },
   { path: 'policlinic-queue', component: PatientQueueComponent, canActivate: [AuthGuard] },
+  { path: 'policlinic-patient-diagnosis', component: PatientDiagnosisComponent, canActivate: [AuthGuard] },
 
 ]

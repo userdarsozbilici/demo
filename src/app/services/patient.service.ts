@@ -10,6 +10,17 @@ export class PatientService {
   private apiUrl = 'http://localhost:8080/api/patients'
   private searchResults = new BehaviorSubject<Patient[]>([])
 
+  private currentPatientSubject = new BehaviorSubject<Patient | null>(null);
+
+  setCurrentPatient(patient: Patient): void {
+    this.currentPatientSubject.next(patient);
+  }
+
+  getCurrentPatient(): Observable<Patient | null> {
+    console.log(this.currentPatientSubject.asObservable())
+    return this.currentPatientSubject.asObservable();
+  }
+
   constructor(private http: HttpClient) {}
 
   createPatient(patient: Patient): Observable<Object> {

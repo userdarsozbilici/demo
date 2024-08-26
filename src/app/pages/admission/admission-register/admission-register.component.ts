@@ -52,7 +52,7 @@ export class AdmissionRegisterComponent implements OnInit {
     this.admissionForm = this.fb.group({
       admissionType: ['', Validators.required],
       policlinic: ['', Validators.required],
-      note: [''],
+      note: ['', Validators.required],
     });
   }
 
