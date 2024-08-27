@@ -65,21 +65,15 @@
   padding: 0.3rem;
   border-radius: 20%;
   margin-right: 2rem;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-}
-
-.female-avatar-image {
-  background: linear-gradient(to top right, #d2e4fd, #FE698A);
-  width: 80px;
-  height: 80px;
-  padding: 0.3rem;
-  border-radius: 20%;
-  margin-right: 2rem;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 3px 25px rgba(0, 0, 0, 0.5);
 }
 
 .patient-details {
   text-align: left;
+  border-radius: 1rem;
+  padding: 1rem;
+  width: 50%;
+  box-shadow: 0 3px 25px rgba(0, 0, 0, 0.4);
 }
 
 .patient-info-section h3 {

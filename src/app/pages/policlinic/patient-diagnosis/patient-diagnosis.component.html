@@ -8,7 +8,7 @@
       <div class="logo-container">
         <img src="assets/erc-logo.jpg" alt="ERC Logo" class="logo" />
       </div>
-      <h1>Hasta Tanı Paneli</h1>
+      <h1>{{policlinicName}} Hasta Tanı Paneli</h1>
     </div>
 
     <div *ngIf="section === 'info'" class="step-content two-columns">
@@ -16,7 +16,8 @@
         <div class="patient-info-section">
           <h3>Hasta Bilgileri</h3>
           <div class="patient-info-content">
-            <img
+            <div class="patient-avatar">
+              <img
               src="assets/user.png"
               alt="Avatar"
               class="avatar-image"
@@ -24,6 +25,8 @@
                 'background-color': patient.gender === 'Female' ? '#FE698A' : '#ADD8E6'
               }"
             />
+            </div>
+            
             <div class="patient-details">
               <p>
                 <strong>İsim:</strong> {{ patient.firstName }}

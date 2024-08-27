@@ -14,6 +14,8 @@ import { MedicineService } from '../../../services/medicine.service.ts.service';
 import { PatientDiagnosisService } from '../../../services/patient-diagnosis.service';
 import { ToastrService } from 'ngx-toastr';
 import { PatientDiagnosis } from '../../../models/patient-diagnosis.model';
+import { PoliclinicService } from '../../../services/policlinic.service';
+import { Policlinic } from '../../../services/policlinic.service';
 
 @Component({
   selector: 'app-patient-diagnosis',
@@ -35,6 +37,7 @@ export class PatientDiagnosisComponent implements OnInit, OnDestroy {
   note: string = '';
   avatarUrl: string = '';
   intervalId: any;
+  policlinicName: String = ''
 
   drugOptions: { label: string; value: string }[] = [];
 
@@ -50,13 +53,14 @@ export class PatientDiagnosisComponent implements OnInit, OnDestroy {
     private admissionService: AdmissionService,
     private medicineService: MedicineService,
     private patientDiagnosisService: PatientDiagnosisService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private policlinicService: PoliclinicService 
   ) {}
 
   ngOnInit(): void {
     this.loadPatientData();
     this.loadDrugOptions();
-
+    this.loadPoliclinicName();
     this.startPolling();
   }
 
@@ -78,6 +82,23 @@ export class PatientDiagnosisComponent implements OnInit, OnDestroy {
     if (this.intervalId) {
       clearInterval(this.intervalId);
       this.intervalId = null; 
+    }
+  }
+
+  loadPoliclinicName(): void {
+    const policlinicId = localStorage.getItem('policlinicId');
+    if (policlinicId) {
+      this.policlinicService.getPoliclinicById(+policlinicId).subscribe({
+        next: (policlinic: Policlinic) => {
+          this.policlinicName = `${policlinic.name} Polikliniği`;
+        },
+        error: (err) => {
+          console.error('Error fetching policlinic name:', err);
+          this.policlinicName = 'Poliklinik';
+        }
+      });
+    } else {
+      this.policlinicName = 'Poliklinik';
     }
   }
   
