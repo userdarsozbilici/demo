@@ -144,6 +144,16 @@ export class AuthService {
     localStorage.removeItem('refreshToken')
   }
 
+  clearUserInfos(){
+    this.clearRole()
+    this.clearUserId()
+    this.clearPoliclinicId()
+  }
+
+  clearUserId(){
+    localStorage.removeItem("userId")
+  }
+
   clearRole(): void {
     localStorage.removeItem("role")
   }
@@ -176,6 +186,7 @@ export class AuthService {
     this.http.post(`${this.apiUrl}/logout`, null, { headers }).subscribe({
       next: () => {
         this.clearTokens()
+        this.clearUserInfos()
         this.router.navigate(['/login'])
         this.toastr.info('Oturumunuz Sonlanmıştır.')
       },
@@ -234,8 +245,11 @@ export class AuthService {
 
   getUsernameFromToken(): string | null {
     const token = this.getToken()
+    console.log(token)
     if (token) {
+      console.log("ifff")
       const decoded = this.parseJwt(token)
+      console.log(decoded)
       return decoded ? decoded.sub : null
     }
     return null

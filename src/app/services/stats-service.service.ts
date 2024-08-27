@@ -10,6 +10,8 @@ export interface StatsDTO {
   averageAgeMale: number
   averageAgeFemale: number
   patientsByCity: {}
+  patientsByPoliclinic:{}
+  patientsByAdmissionType:{}
 }
 @Injectable({
   providedIn: 'root',

@@ -20,11 +20,9 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // Subscribe to router events to check for route changes
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe((event: Event) => {
-      // Type guard to ensure the event is of type NavigationEnd
       if (event instanceof NavigationEnd && (event.urlAfterRedirects === '/' || event.urlAfterRedirects === '')) {
         this.routingHandlerService.handleRouting("navigate-to-home");
       }

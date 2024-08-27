@@ -140,5 +140,30 @@
         ></p-chart>
       </div>
     </div>
+
+    <div class="row-divider"></div>
+
+    <div class="header">
+      <h3>Poliklinik ve Kabul Tiplerine Göre Hasta Dağılımı</h3>
+    </div>
+    <div class="content" style="display: flex; justify-content: space-evenly;">
+      <div class="card">
+        <h3>Polikliniklere Göre Hasta Dağılımı</h3>
+        <p-chart
+          type="pie"
+          [data]="patientsByPoliclinicData"
+          [options]="pieChartOptions"
+        ></p-chart>
+      </div>
+
+      <div class="card">
+        <h3>Kabul Tiplerine Göre Hasta Dağılımı</h3>
+        <p-chart
+          type="pie"
+          [data]="patientsByAdmissionTypeData"
+          [options]="pieChartOptions"
+        ></p-chart>
+      </div>
+    </div>
   </div>
 </div>

@@ -4,8 +4,8 @@ import { HttpClientModule } from '@angular/common/http'
 import { ChartModule } from 'primeng/chart'
 import { StatsService, StatsDTO } from '../../../services/stats-service.service'
 import { NavigateHomeButtonComponent } from '../../../common-components/navigate-home-button/navigate-home-button.component'
+import { PoliclinicService, Policlinic } from '../../../services/policlinic.service'
 import { GlobalAssets } from '../../../globals/assets'
-
 
 @Component({
   selector: 'app-dashboard',
@@ -32,6 +32,9 @@ export class DashboardComponent implements OnInit {
   patientsByCityDataPart2: any
   biggestCitiesData: any
   topThreeCitiesData: any
+  patientsByPoliclinicData: any
+  patientsByAdmissionTypeData: any
+  policlinicMap: { [id: string]: string } = {}
 
   totalPatientsData: any
   averageAgeData: any
@@ -42,16 +45,21 @@ export class DashboardComponent implements OnInit {
   barChartOptions: any
   patientsByCityChartOptions: any
   
-  assets : any = {}
+  assets: any = {}
 
-  constructor(private statsService: StatsService) {}
+  constructor(
+    private statsService: StatsService,
+    private policlinicService: PoliclinicService
+  ) {}
 
   ngOnInit() {
+    // Fetch stats data and policlinic data
     this.statsService.getStats().subscribe((stats: StatsDTO) => {
       this.averageAge = stats.averageAge
       this.averageAgeMale = stats.averageAgeMale
       this.averageAgeFemale = stats.averageAgeFemale
       this.assets = GlobalAssets;
+      
       this.animateCounter('totalPatients', stats.totalPatients, () =>
         this.updateTotalPatientsChart(),
       )
@@ -74,7 +82,17 @@ export class DashboardComponent implements OnInit {
       this.updatePatientsByCityCharts(stats.patientsByCity)
       this.updateBiggestCitiesChart(stats.patientsByCity)
       this.updateTopThreeCitiesChart(stats.patientsByCity)
-
+      
+      // Fetch policlinic data
+      this.policlinicService.getAllPoliclinics().subscribe((policlinics: Policlinic[]) => {
+        policlinics.forEach(policlinic => {
+          this.policlinicMap[policlinic.id] = policlinic.name;
+        });
+        this.updatePatientsByPoliclinicChart(stats.patientsByPoliclinic);
+      });
+      
+      this.updatePatientsByAdmissionTypeChart(stats.patientsByAdmissionType);
+      
       this.pieChartOptions = {
         responsive: true,
         maintainAspectRatio: false,
@@ -344,4 +362,84 @@ export class DashboardComponent implements OnInit {
       }
     }
   }
+
+  updatePatientsByPoliclinicChart(patientsByPoliclinic: { [policlinicId: string]: number }) {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+
+    if (ctx) {
+        const labels = Object.keys(patientsByPoliclinic).map(key => this.policlinicMap[key] || `Poliklinik ${key}`);
+        const data = Object.values(patientsByPoliclinic);
+
+        const predefinedGradients = [
+            { color1: '#42A5F5', color2: '#1976D2' },  // Blue gradient
+            { color1: '#FF6384', color2: '#FF0033' },  // Red gradient
+            { color1: '#66BB6A', color2: '#388E3C' },  // Green gradient
+            { color1: '#FFB74D', color2: '#FF9800' },  // Orange gradient
+            { color1: '#BA68C8', color2: '#8E24AA' },  // Purple gradient
+            { color1: '#4DD0E1', color2: '#00ACC1' },  // Cyan gradient
+            { color1: '#F06292', color2: '#E91E63' },  // Pink gradient
+            { color1: '#D4E157', color2: '#C0CA33' },  // Lime gradient
+        ];
+
+        const gradients = data.map((_, index) => {
+            const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+            const colors = predefinedGradients[index % predefinedGradients.length];
+            gradient.addColorStop(0, colors.color1);
+            gradient.addColorStop(1, colors.color2);
+            return gradient;
+        });
+
+        this.patientsByPoliclinicData = {
+            labels: labels,
+            datasets: [
+                {
+                    data: data,
+                    backgroundColor: gradients,
+                    hoverBackgroundColor: gradients,
+                },
+            ],
+        };
+    }
+}
+
+updatePatientsByAdmissionTypeChart(patientsByAdmissionType: { [type: string]: number }) {
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+
+  if (ctx) {
+    const gradient1 = ctx.createLinearGradient(0, 0, 0, 400);
+    gradient1.addColorStop(0, '#E1BEE7'); // Light purple
+    gradient1.addColorStop(1, '#7B1FA2'); // Purple
+
+    const gradient2 = ctx.createLinearGradient(0, 0, 0, 400);
+    gradient2.addColorStop(0, '#FFCC80'); // Light orange
+    gradient2.addColorStop(1, '#FB8C00'); // Orange
+
+    const gradient3 = ctx.createLinearGradient(0, 0, 0, 400);
+    gradient3.addColorStop(0, '#90CAF9'); // Light blue
+    gradient3.addColorStop(1, '#1976D2'); // Blue
+
+    const typeMap: { [key: string]: string } = {
+      outpatient: 'Ayakta',
+      inpatient: 'Yatan',
+      daily: 'Günübirlik',
+    };
+
+    const labels = Object.keys(patientsByAdmissionType).map(
+      (key) => typeMap[key] || key
+    );
+
+    this.patientsByAdmissionTypeData = {
+      labels: labels,
+      datasets: [
+        {
+          data: Object.values(patientsByAdmissionType),
+          backgroundColor: [gradient1, gradient2, gradient3],
+          hoverBackgroundColor: [gradient1, gradient2, gradient3],
+        },
+      ],
+    };
+  }
+}
 }
