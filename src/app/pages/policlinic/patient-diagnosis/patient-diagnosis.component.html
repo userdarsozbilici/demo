@@ -1,4 +1,5 @@
 <div class="page-background">
+  <app-navigate-home-button></app-navigate-home-button>
   <div *ngIf="loading">
     <app-loading-spinner></app-loading-spinner>
   </div>
@@ -18,7 +19,7 @@
           <div class="patient-info-content">
             <div class="patient-avatar">
               <img
-              src="assets/user.png"
+              src="assets/patient.png"
               alt="Avatar"
               class="avatar-image"
               [ngStyle]="{ 
@@ -48,13 +49,20 @@
         </div>
 
         <div class="potential-diagnosis-section">
-          <h3>Potansiyel Hastalık</h3>
+          <h3>
+            Potansiyel Hastalık
+            <i
+              class="pi pi-info-circle"
+              pTooltip="Potansiyel Hastalık Yapay Zeka yardımıyla bulunmuştur ve yardım amaçlıdır."
+              tooltipPosition="top"
+              style="cursor: pointer; margin-left: 8px; font-weight: 600;"
+            ></i>
+          </h3>
           <p>
-            {{
-              potentialDiagnosis || "Sistemde potansiyel hastalık bulunmuyor."
-            }}
+            {{ potentialDiagnosis || "Sistemde potansiyel hastalık bulunmuyor." }}
           </p>
         </div>
+        
 
         <div class="action-buttons">
           <button

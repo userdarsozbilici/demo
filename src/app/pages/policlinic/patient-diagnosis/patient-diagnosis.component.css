@@ -59,14 +59,16 @@
 }
 
 .avatar-image {
-  background: linear-gradient(to top right, #d2e4fd, #277DD5);
-  width: 80px;
-  height: 80px;
-  padding: 0.3rem;
+  background: linear-gradient(to bottom right, #ff7a85, #6f42c1);
+  width: 90px;
+  height: 90px;
+  padding: 0.5rem;
   border-radius: 20%;
   margin-right: 2rem;
-  box-shadow: 0 3px 25px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 3px 25px rgba(0, 0, 0, 0.5); 
 }
+
+
 
 .patient-details {
   text-align: left;

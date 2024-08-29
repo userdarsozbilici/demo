@@ -372,15 +372,18 @@ export class DashboardComponent implements OnInit {
         const data = Object.values(patientsByPoliclinic);
 
         const predefinedGradients = [
-            { color1: '#42A5F5', color2: '#1976D2' },  // Blue gradient
-            { color1: '#FF6384', color2: '#FF0033' },  // Red gradient
-            { color1: '#66BB6A', color2: '#388E3C' },  // Green gradient
-            { color1: '#FFB74D', color2: '#FF9800' },  // Orange gradient
-            { color1: '#BA68C8', color2: '#8E24AA' },  // Purple gradient
-            { color1: '#4DD0E1', color2: '#00ACC1' },  // Cyan gradient
-            { color1: '#F06292', color2: '#E91E63' },  // Pink gradient
-            { color1: '#D4E157', color2: '#C0CA33' },  // Lime gradient
-        ];
+          { color1: '#42A5F5', color2: '#1976D2' },  // Blue gradient
+          { color1: '#FF6384', color2: '#FF0033' },  // Red gradient
+          { color1: '#66BB6A', color2: '#388E3C' },  // Green gradient
+          { color1: '#FFB74D', color2: '#FF9800' },  // Orange gradient
+          { color1: '#BA68C8', color2: '#8E24AA' },  // Purple gradient
+          { color1: '#4DD0E1', color2: '#00ACC1' },  // Cyan gradient
+          { color1: '#F06292', color2: '#E91E63' },  // Pink gradient
+          { color1: '#D4E157', color2: '#C0CA33' },  // Lime gradient
+          { color1: '#FFA726', color2: '#FB8C00' },  // Deep Orange gradient
+          { color1: '#AB47BC', color2: '#8E24AA' },  // Deep Purple gradient
+      ];
+      
 
         const gradients = data.map((_, index) => {
             const gradient = ctx.createLinearGradient(0, 0, 0, 400);

@@ -5,6 +5,7 @@ import { PatientService } from '../../../services/patient.service';
 import { Patient } from '../../../models/patient.model';
 import { LoadingSpinnerComponent } from '../../../common-components/loading-spinner/loading-spinner.component';
 import { DropdownModule } from 'primeng/dropdown';
+import { TooltipModule } from 'primeng/tooltip';
 import { MessageService } from 'primeng/api';
 import { AdmissionService } from '../../../services/admission.service';
 import { Admission } from '../../../models/admission.model';
@@ -16,13 +17,14 @@ import { ToastrService } from 'ngx-toastr';
 import { PatientDiagnosis } from '../../../models/patient-diagnosis.model';
 import { PoliclinicService } from '../../../services/policlinic.service';
 import { Policlinic } from '../../../services/policlinic.service';
+import { NavigateHomeButtonComponent } from '../../../common-components/navigate-home-button/navigate-home-button.component';
 
 @Component({
   selector: 'app-patient-diagnosis',
   standalone: true,
   templateUrl: './patient-diagnosis.component.html',
   styleUrls: ['./patient-diagnosis.component.css'],
-  imports: [CommonModule, FormsModule, LoadingSpinnerComponent, DropdownModule],
+  imports: [CommonModule, FormsModule, LoadingSpinnerComponent, DropdownModule,TooltipModule, NavigateHomeButtonComponent],
   providers: [MessageService],
 })
 export class PatientDiagnosisComponent implements OnInit, OnDestroy {
